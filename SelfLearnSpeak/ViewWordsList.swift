@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RealmSwift
+import AVFoundation
 
 /// An individual item. Part of an `ItemGroup`.
 final class Item: Object, ObjectKeyIdentifiable {
@@ -69,7 +70,6 @@ extension ItemGroup {
 
 /// The main content view if not using Sync.
 struct ViewWordsList: View {
-    @State var searchFilter: String = ""
     // Implicitly use the default realm's objects(ItemGroup.self)
     @ObservedResults(ItemGroup.self) var itemGroups
     
@@ -94,6 +94,23 @@ struct ViewWordsList: View {
 /// and deleting items in the ItemGroup.
 struct ItemsView: View {
     @ObservedRealmObject var itemGroup: ItemGroup
+    
+    //读取文字工具
+    @State private var synthesizer = AVSpeechSynthesizer()
+    
+    func text2speech(_ text: String) {
+        let utterance = AVSpeechUtterance(string: text)
+        utterance.voice = AVSpeechSynthesisVoice(language: "ja-JP")
+//        utterance.voice = AVSpeechSynthesisVoice(identifier: AVSpeechSynthesisVoiceIdentifierAlex)
+        //utterance.rate = 0.01
+//        utterance.pitchMultiplier = 1.0
+        
+        //声音停止
+        synthesizer.stopSpeaking(at: .immediate)
+        
+        //声音播放
+        synthesizer.speak(utterance)
+    }
     
     @State var input_text = ""
     @State var description_text: String = ""
@@ -120,20 +137,30 @@ struct ItemsView: View {
                 // Action bar at bottom contains Add button.
                     VStack{
                         TextField("input_text",text:$input_text)
-                            .background(Color.mint)
+                            .textFieldStyle(DefaultTextFieldStyle())
+                            .padding(.horizontal)
                         TextField("description_text",text:$description_text)
-                            .background(Color.teal)
+                            .textFieldStyle(DefaultTextFieldStyle())
+                            .padding(.horizontal)
                         HStack {
                             Spacer()
                             Button(action: {
                                 // The bound collection automatically
                                 // handles write transactions, so we can
                                 // append directly to it.
-                                var item = Item()
+                                let item = Item()
                                 item.name = input_text
                                 item.itemDescription = description_text
                                 $itemGroup.items.append(item)
+                                input_text = ""
+                                description_text = ""
                             }) { Image(systemName: "plus") }
+                                .buttonStyle(CustomButtonStyle())
+                            Spacer()
+                            Button(action: {
+                                
+                                text2speech(input_text)
+                            }) { Image(systemName: "speaker.wave.3") }
                                 .buttonStyle(CustomButtonStyle())
                             Spacer()
                             Button(action: {
