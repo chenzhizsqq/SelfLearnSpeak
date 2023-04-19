@@ -11,7 +11,8 @@ import SwiftUI
 struct SelfLearnSpeakApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            //ContentView()
+            ViewWordsList()
         }
     }
 }
