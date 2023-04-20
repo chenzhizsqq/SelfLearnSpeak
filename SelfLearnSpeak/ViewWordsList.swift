@@ -155,18 +155,18 @@ struct ItemsView: View {
                                 input_text = ""
                                 description_text = ""
                             }) { Image(systemName: "plus") }
-                                .buttonStyle(CustomButtonStyle())
+                                .buttonStyle(CustomButtonStyle(padding: 10))
                             Spacer()
                             Button(action: {
                                 
                                 text2speech(input_text)
                             }) { Image(systemName: "speaker.wave.3") }
-                                .buttonStyle(CustomButtonStyle())
+                                .buttonStyle(CustomButtonStyle(padding: 10))
                             Spacer()
                             Button(action: {
                                 
                             }) { Image(systemName: "magnifyingglass") }
-                                .buttonStyle(CustomButtonStyle())
+                                .buttonStyle(CustomButtonStyle(padding: 10))
                             Spacer()
                         }.padding(20)
                 }.padding()
@@ -178,21 +178,47 @@ struct ItemsView: View {
 /// Represents an Item in a list.
 struct ItemRow: View {
     @ObservedRealmObject var item: Item
+    
+    //读取文字工具
+    @State private var synthesizer = AVSpeechSynthesizer()
+    
+    func text2speech(_ text: String) {
+        let utterance = AVSpeechUtterance(string: text)
+        utterance.voice = AVSpeechSynthesisVoice(language: "ja-JP")
+//        utterance.voice = AVSpeechSynthesisVoice(identifier: AVSpeechSynthesisVoiceIdentifierAlex)
+        //utterance.rate = 0.01
+//        utterance.pitchMultiplier = 1.0
+        
+        //声音停止
+        synthesizer.stopSpeaking(at: .immediate)
+        
+        //声音播放
+        synthesizer.speak(utterance)
+    }
+    
     var body: some View {
         // You can click an item in the list to navigate to an edit details screen.
-        NavigationLink(destination: ItemDetailsView(item: item)) {
-            VStack{
-                HStack{
-                    
-                    Text(item.name)
-                    if item.isFavorite {
-                        // If the user "favorited" the item, display a heart icon
-                        Image(systemName: "heart.fill")
+        HStack{
+            NavigationLink(destination: ItemDetailsView(item: item)) {
+                VStack{
+                    HStack{
+                        
+                        Text(item.name)
+                        if item.isFavorite {
+                            // If the user "favorited" the item, display a heart icon
+                            Image(systemName: "heart.fill")
+                        }
                     }
+                    
+                    Text(item.itemDescription)
                 }
-                
-                Text(item.itemDescription)
             }
+            
+            
+            Button(action: {
+                text2speech(item.name)
+            }) { Image(systemName: "speaker.wave.3") }
+                .buttonStyle(CustomButtonStyle(padding: 5))
         }
     }
 }
@@ -214,9 +240,11 @@ struct ItemDetailsView: View {
 
 // MARK: - 选择按钮的模板
 struct CustomButtonStyle: ButtonStyle {
+    
+    var padding: CGFloat
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding(10)
+            .padding(.all,padding)
             .background(Color.orange)
             .foregroundColor(.white)
             .cornerRadius(8)
