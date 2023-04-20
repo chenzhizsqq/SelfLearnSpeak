@@ -14,6 +14,7 @@
 		3389B1B429EFB287009EA217 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3389B1B329EFB287009EA217 /* Realm */; };
 		3389B1B629EFB287009EA217 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3389B1B529EFB287009EA217 /* RealmSwift */; };
 		3389B1BD29EFB88A009EA217 /* ViewWordsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3389B1BC29EFB88A009EA217 /* ViewWordsList.swift */; };
+		33B0288429F110FD003B55AD /* EnvironmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0288329F110FD003B55AD /* EnvironmentModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		3389B1A829EFB06C009EA217 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3389B1AB29EFB06C009EA217 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3389B1BC29EFB88A009EA217 /* ViewWordsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewWordsList.swift; sourceTree = "<group>"; };
+		33B0288329F110FD003B55AD /* EnvironmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				3389B1BC29EFB88A009EA217 /* ViewWordsList.swift */,
 				3389B1A629EFB069009EA217 /* ContentView.swift */,
 				3389B1A829EFB06C009EA217 /* Assets.xcassets */,
+				33B0288329F110FD003B55AD /* EnvironmentModel.swift */,
 				3389B1AA29EFB06C009EA217 /* Preview Content */,
 			);
 			path = SelfLearnSpeak;
@@ -155,6 +158,7 @@
 				3389B1A729EFB069009EA217 /* ContentView.swift in Sources */,
 				3389B1BD29EFB88A009EA217 /* ViewWordsList.swift in Sources */,
 				3389B1A529EFB069009EA217 /* SelfLearnSpeakApp.swift in Sources */,
+				33B0288429F110FD003B55AD /* EnvironmentModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -94,23 +94,8 @@ struct ViewWordsList: View {
 /// and deleting items in the ItemGroup.
 struct ItemsView: View {
     @ObservedRealmObject var itemGroup: ItemGroup
+    @EnvironmentObject var envModel: EnvironmentModel
     
-    //读取文字工具
-    @State private var synthesizer = AVSpeechSynthesizer()
-    
-    func text2speech(_ text: String) {
-        let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = AVSpeechSynthesisVoice(language: "ja-JP")
-//        utterance.voice = AVSpeechSynthesisVoice(identifier: AVSpeechSynthesisVoiceIdentifierAlex)
-        //utterance.rate = 0.01
-//        utterance.pitchMultiplier = 1.0
-        
-        //声音停止
-        synthesizer.stopSpeaking(at: .immediate)
-        
-        //声音播放
-        synthesizer.speak(utterance)
-    }
     
     @State var input_text = ""
     @State var description_text: String = ""
@@ -159,7 +144,7 @@ struct ItemsView: View {
                             Spacer()
                             Button(action: {
                                 
-                                text2speech(input_text)
+                                envModel.text2speech(input_text)
                             }) { Image(systemName: "speaker.wave.3") }
                                 .buttonStyle(CustomButtonStyle(padding: 10))
                             Spacer()
@@ -179,22 +164,7 @@ struct ItemsView: View {
 struct ItemRow: View {
     @ObservedRealmObject var item: Item
     
-    //读取文字工具
-    @State private var synthesizer = AVSpeechSynthesizer()
-    
-    func text2speech(_ text: String) {
-        let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = AVSpeechSynthesisVoice(language: "ja-JP")
-//        utterance.voice = AVSpeechSynthesisVoice(identifier: AVSpeechSynthesisVoiceIdentifierAlex)
-        //utterance.rate = 0.01
-//        utterance.pitchMultiplier = 1.0
-        
-        //声音停止
-        synthesizer.stopSpeaking(at: .immediate)
-        
-        //声音播放
-        synthesizer.speak(utterance)
-    }
+    @EnvironmentObject var envModel: EnvironmentModel
     
     var body: some View {
         // You can click an item in the list to navigate to an edit details screen.
@@ -216,7 +186,7 @@ struct ItemRow: View {
             
             
             Button(action: {
-                text2speech(item.name)
+                envModel.text2speech(item.name)
             }) { Image(systemName: "speaker.wave.3") }
                 .buttonStyle(CustomButtonStyle(padding: 5))
         }
