@@ -97,8 +97,13 @@ struct ItemsView: View {
     @EnvironmentObject var envModel: EnvironmentModel
     
     
+    ///是否显示第二个页面
+    @State private var showSecondView = false
+    
     @State var input_text = ""
     @State var description_text: String = ""
+    //@State var all_text = ""
+    
     /// The button to be displayed on the top left.
     var leadingBarButton: AnyView?
     var body: some View {
@@ -110,52 +115,32 @@ struct ItemsView: View {
                     ForEach(itemGroup.items) { item in
                         ItemRow(item: item)
                     }.onDelete(perform: $itemGroup.items.remove)
-                    .onMove(perform: $itemGroup.items.move)
+                        .onMove(perform: $itemGroup.items.move)
                 }
                 .listStyle(GroupedListStyle())
-                    .navigationBarTitle("Items", displayMode: .large)
-                    .navigationBarBackButtonHidden(true)
-                    .navigationBarItems(
-                        leading: self.leadingBarButton,
-                        // Edit button on the right to enable rearranging items
-                        trailing: EditButton())
+                .navigationBarTitle("Items", displayMode: .large)
+                .navigationBarBackButtonHidden(true)
+                .navigationBarItems(
+                    leading: EditButton(),
+                    // Edit button on the right to enable rearranging items
+                    trailing:Button("添加") {
+                        showSecondView = true
+                    }
+                )
+                Button("全部发音") {
+                    var all_text = ""
+                    itemGroup.items.forEach { Item in
+                        all_text.append(Item.name)
+                        all_text.append("。")
+                    }
+                    envModel.text2speech(all_text)
+                    
+                }
                 // Action bar at bottom contains Add button.
-                    VStack{
-                        TextField("input_text",text:$input_text)
-                            .textFieldStyle(DefaultTextFieldStyle())
-                            .padding(.horizontal)
-                        TextField("description_text",text:$description_text)
-                            .textFieldStyle(DefaultTextFieldStyle())
-                            .padding(.horizontal)
-                        HStack {
-                            Spacer()
-                            Button(action: {
-                                // The bound collection automatically
-                                // handles write transactions, so we can
-                                // append directly to it.
-                                let item = Item()
-                                item.name = input_text
-                                item.itemDescription = description_text
-                                $itemGroup.items.append(item)
-                                input_text = ""
-                                description_text = ""
-                            }) { Image(systemName: "plus") }
-                                .buttonStyle(CustomButtonStyle(padding: 10))
-                            Spacer()
-                            Button(action: {
-                                
-                                envModel.text2speech(input_text)
-                            }) { Image(systemName: "speaker.wave.3") }
-                                .buttonStyle(CustomButtonStyle(padding: 10))
-                            Spacer()
-                            Button(action: {
-                                
-                            }) { Image(systemName: "magnifyingglass") }
-                                .buttonStyle(CustomButtonStyle(padding: 10))
-                            Spacer()
-                        }.padding(20)
-                }.padding()
             }
+        }
+        .sheet(isPresented: $showSecondView){
+            ViewWordsListInsert(itemGroup: itemGroup, input_text: $input_text, description_text: $description_text)
         }
     }
 }
