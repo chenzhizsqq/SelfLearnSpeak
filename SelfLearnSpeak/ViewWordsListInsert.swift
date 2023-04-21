@@ -111,14 +111,18 @@ struct ViewWordsListInsert: View {
                 Spacer()
             }.padding(20)
             
-            Button("翻译") {
-                getfanyi(你的APPID: "20211218001031744", 你的密钥: "sciKrOsAy6QmASY4fC1g",from: "zh",to: "en", 被翻译内容: "请翻译一下")
-            }
-            .padding()
             
-            Text("原文")
-                .textFieldStyle(DefaultTextFieldStyle())
+            HStack{
+                Text("原文")
+                    .textFieldStyle(DefaultTextFieldStyle())
+                    .padding(.horizontal)
+                Button("翻译") {
+                    if(!input_text.isEmpty){
+                        getfanyi(你的APPID: "20211218001031744", 你的密钥: "sciKrOsAy6QmASY4fC1g",from: "jp" ,to: "zh", 被翻译内容: input_text)
+                    }
+                }
                 .padding(.horizontal)
+            }
             
             TextEditor(text: $input_text)
                 .autocapitalization(.none)
@@ -128,9 +132,17 @@ struct ViewWordsListInsert: View {
                 .background(.cyan)
                 .padding()
             
-            Text("翻译")
-                .textFieldStyle(DefaultTextFieldStyle())
+            HStack{
+                Text("原文")
+                    .textFieldStyle(DefaultTextFieldStyle())
+                    .padding(.horizontal)
+                Button("翻译") {
+                    if(!input_text.isEmpty){
+                        getfanyi2(你的APPID: "20211218001031744", 你的密钥: "sciKrOsAy6QmASY4fC1g",from: "zh" ,to: "jp", 被翻译内容: description_text)
+                    }
+                }
                 .padding(.horizontal)
+            }
             
             TextEditor(text: $description_text)
                 .autocapitalization(.none)
@@ -142,8 +154,7 @@ struct ViewWordsListInsert: View {
         }.padding()
     }
     
-    func getfanyi(你的APPID:String,你的密钥:String,from:String,to:String,被翻译内容:String){
-        
+    func getfanyi(你的APPID:String,你的密钥:String,from:String,to:String,被翻译内容:String) {
         
         //let 随机数 = "1435660288"
         let 随机数 = String(UInt64.random(in: 1000000000...9999999999))
@@ -164,11 +175,46 @@ struct ViewWordsListInsert: View {
                 print(data.to)
                 print(data.transResult)
                 
-                if let dst = data.transResult.first?.src as? String {
-                    print(dst)
-                }
-                if let src = data.transResult.first?.dst as? String {
+                if let src = data.transResult.first?.src as? String {
                     print(src)
+                }
+                if let dst = data.transResult.first?.dst as? String {
+                    print(dst)
+                    description_text = dst
+                }
+            case .failure(let error):
+                debugPrint("!!! response.request failed: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func getfanyi2(你的APPID:String,你的密钥:String,from:String,to:String,被翻译内容:String) {
+        
+        //let 随机数 = "1435660288"
+        let 随机数 = String(UInt64.random(in: 1000000000...9999999999))
+        
+        //加密方法在另一个文件
+        let 加密 = "\(你的APPID)\(被翻译内容)\(随机数)\(你的密钥)".DDMD5Encrypt(.lowercase32)
+        
+        let 编码 = 被翻译内容.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+            
+        let 网址 = "https://fanyi-api.baidu.com/api/trans/vip/translate?"+"q=\(编码!)&from=\(from)&to=\(to)&appid=\(你的APPID)&salt=\(随机数)&sign=\(加密)"
+        
+        //发送请求
+        AF.request(网址).responseDecodable(of: TranslationResponse.self) { response in
+            switch response.result {
+            case .success(let data):
+                debugPrint("!!! response.request success")
+                print(data.from)
+                print(data.to)
+                print(data.transResult)
+                
+                if let src = data.transResult.first?.src as? String {
+                    print(src)
+                }
+                if let dst = data.transResult.first?.dst as? String {
+                    print(dst)
+                    input_text = dst
                 }
             case .failure(let error):
                 debugPrint("!!! response.request failed: \(error.localizedDescription)")
