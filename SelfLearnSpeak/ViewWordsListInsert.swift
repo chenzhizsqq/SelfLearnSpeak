@@ -160,7 +160,7 @@ struct ViewWordsListInsert: View {
         let 你的密钥 = EnvironmentModel.baiduFanyiKey
         
         //let 随机数 = "1435660288"
-        let 随机数 = String(UInt64.random(in: 1000000000...9999999999))
+        let 随机数 = String(UInt64.random(in: 1000000000...2000000000))
         
         //加密方法在另一个文件
         let 加密 = "\(你的APPID)\(被翻译内容)\(随机数)\(你的密钥)".DDMD5Encrypt(.lowercase32)
@@ -197,7 +197,7 @@ struct ViewWordsListInsert: View {
         let 你的密钥 = EnvironmentModel.baiduFanyiKey
         
         //let 随机数 = "1435660288"
-        let 随机数 = String(UInt64.random(in: 1000000000...9999999999))
+        let 随机数 = String(UInt64.random(in: 1000000000...2000000000))
         
         //加密方法在另一个文件
         let 加密 = "\(你的APPID)\(被翻译内容)\(随机数)\(你的密钥)".DDMD5Encrypt(.lowercase32)
