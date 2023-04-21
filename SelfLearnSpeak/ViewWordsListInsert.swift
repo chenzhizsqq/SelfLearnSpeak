@@ -81,11 +81,11 @@ struct ViewWordsListInsert: View {
     @Binding var description_text: String
     var body: some View {
         
-        VStack{
+        ScrollView{
+            VStack{
+                
             
-            HStack {
-                Spacer()
-                Button(action: {
+                Button("添加") {
                     // The bound collection automatically
                     // handles write transactions, so we can
                     // append directly to it.
@@ -95,66 +95,69 @@ struct ViewWordsListInsert: View {
                     $itemGroup.items.append(item)
                     input_text = ""
                     description_text = ""
-                }) { Image(systemName: "plus") }
-                    .buttonStyle(CustomButtonStyle(padding: 10))
-                Spacer()
-                Button(action: {
-                    
-                    envModel.text2speech(input_text)
-                }) { Image(systemName: "speaker.wave.3") }
-                    .buttonStyle(CustomButtonStyle(padding: 10))
-                Spacer()
-                Button(action: {
-                    
-                }) { Image(systemName: "magnifyingglass") }
-                    .buttonStyle(CustomButtonStyle(padding: 10))
-                Spacer()
-            }.padding(20)
-            
-            
-            HStack{
-                Text("原文")
-                    .textFieldStyle(DefaultTextFieldStyle())
-                    .padding(.horizontal)
-                Button("翻译") {
-                    if(!input_text.isEmpty){
-                        getfanyi(你的APPID: EnvironmentModel.baiduFanyiAppId, 你的密钥:EnvironmentModel.baiduFanyiKey ,from: "jp" ,to: "zh", 被翻译内容: input_text)
                     }
-                }
-                .padding(.horizontal)
-            }
-            
-            TextEditor(text: $input_text)
-                .autocapitalization(.none)
-                .frame(height: 150)
-                .overlay(RoundedRectangle(cornerRadius: 5).stroke(.gray, lineWidth: 1))
-                .border(.gray)
-                .background(.cyan)
+                .buttonStyle(CustomButtonStyle(padding: 10))
                 .padding()
-            
-            HStack{
-                Text("原文")
-                    .textFieldStyle(DefaultTextFieldStyle())
-                    .padding(.horizontal)
-                Button("翻译") {
-                    if(!input_text.isEmpty){
-                        getfanyi2(你的APPID: EnvironmentModel.baiduFanyiAppId, 你的密钥:EnvironmentModel.baiduFanyiKey,from: "zh" ,to: "jp", 被翻译内容: description_text)
+                
+                HStack{
+                    Text("日文")
+                        .textFieldStyle(DefaultTextFieldStyle())
+                        .padding(.horizontal)
+                    Button("翻译") {
+                        if(!input_text.isEmpty){
+                            getfanyi(from: "jp" ,to: "zh", 被翻译内容: input_text)
+                        }else{
+                            debugPrint("!!! input_text.isEmpty")
+                        }
                     }
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
-            }
-            
-            TextEditor(text: $description_text)
-                .autocapitalization(.none)
-                .frame(height: 150)
-                .overlay(RoundedRectangle(cornerRadius: 5).stroke(.gray, lineWidth: 1))
-                .border(.gray)
-                .background(.cyan)
                 .padding()
-        }.padding()
+                
+                TextEditor(text: $input_text)
+                    .autocapitalization(.none)
+                    .frame(height: 150)
+                    .overlay(RoundedRectangle(cornerRadius: 5).stroke(.gray, lineWidth: 1))
+                    .border(.gray)
+                    .background(.cyan)
+                    .padding()
+                
+                HStack{
+                    Text("中文")
+                        .textFieldStyle(DefaultTextFieldStyle())
+                        .padding(.horizontal)
+                    Button("翻译") {
+                        if(!description_text.isEmpty){
+                            getfanyi2(from: "zh" ,to: "jp", 被翻译内容: description_text)
+                        }else{
+                            debugPrint("!!! description_text.isEmpty")
+                        }
+                    }
+                    .padding(.horizontal)
+                }
+                
+                TextEditor(text: $description_text)
+                    .autocapitalization(.none)
+                    .frame(height: 150)
+                    .overlay(RoundedRectangle(cornerRadius: 5).stroke(.gray, lineWidth: 1))
+                    .border(.gray)
+                    .background(.cyan)
+                    .padding()
+            }
+        }
+        .onTapGesture {
+            hideKeyboard()
+        }
     }
     
-    func getfanyi(你的APPID:String,你的密钥:String,from:String,to:String,被翻译内容:String) {
+    private func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+    
+    func getfanyi(from:String,to:String,被翻译内容:String) {
+        
+        let 你的APPID = EnvironmentModel.baiduFanyiAppId
+        let 你的密钥 = EnvironmentModel.baiduFanyiKey
         
         //let 随机数 = "1435660288"
         let 随机数 = String(UInt64.random(in: 1000000000...9999999999))
@@ -188,7 +191,10 @@ struct ViewWordsListInsert: View {
         }
     }
     
-    func getfanyi2(你的APPID:String,你的密钥:String,from:String,to:String,被翻译内容:String) {
+    func getfanyi2(from:String,to:String,被翻译内容:String) {
+        
+        let 你的APPID = EnvironmentModel.baiduFanyiAppId
+        let 你的密钥 = EnvironmentModel.baiduFanyiKey
         
         //let 随机数 = "1435660288"
         let 随机数 = String(UInt64.random(in: 1000000000...9999999999))
