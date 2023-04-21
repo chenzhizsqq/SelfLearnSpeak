@@ -118,7 +118,7 @@ struct ViewWordsListInsert: View {
                     .padding(.horizontal)
                 Button("翻译") {
                     if(!input_text.isEmpty){
-                        getfanyi(你的APPID: "20211218001031744", 你的密钥: "sciKrOsAy6QmASY4fC1g",from: "jp" ,to: "zh", 被翻译内容: input_text)
+                        getfanyi(你的APPID: EnvironmentModel.baiduFanyiAppId, 你的密钥:EnvironmentModel.baiduFanyiKey ,from: "jp" ,to: "zh", 被翻译内容: input_text)
                     }
                 }
                 .padding(.horizontal)
@@ -138,7 +138,7 @@ struct ViewWordsListInsert: View {
                     .padding(.horizontal)
                 Button("翻译") {
                     if(!input_text.isEmpty){
-                        getfanyi2(你的APPID: "20211218001031744", 你的密钥: "sciKrOsAy6QmASY4fC1g",from: "zh" ,to: "jp", 被翻译内容: description_text)
+                        getfanyi2(你的APPID: EnvironmentModel.baiduFanyiAppId, 你的密钥:EnvironmentModel.baiduFanyiKey,from: "zh" ,to: "jp", 被翻译内容: description_text)
                     }
                 }
                 .padding(.horizontal)
