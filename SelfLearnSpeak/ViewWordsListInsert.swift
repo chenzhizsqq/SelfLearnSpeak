@@ -147,7 +147,8 @@ struct ViewWordsListInsert: View {
         //当前为英翻中
         let 正文 = "苹果"
         
-        let 随机数 = "1435660288"
+        //let 随机数 = "1435660288"
+        let 随机数 = String(UInt64.random(in: 1000000000...9999999999))
         
         //加密方法在另一个文件
         let 加密 = "\(你的APPID)\(正文)\(随机数)\(你的密钥)".DDMD5Encrypt(.lowercase32)
@@ -164,10 +165,6 @@ struct ViewWordsListInsert: View {
             
             debugPrint("!!! response")
             debugPrint(response)
-            //Do Something
-            debugPrint("!!! data")
-            let data = response.data
-            debugPrint(data)
             
             debugPrint("!!! response.result")
             debugPrint(response.result)
@@ -180,22 +177,60 @@ struct ViewWordsListInsert: View {
             
             debugPrint("!!! response.request switch ！！！！！！！！！！！！！！！！！！！1")
             
+            switch response.result {
+                case .success(let data):
+                debugPrint("!!! response.request success")
+                    print(data)
+                
+                if let JSON = data as? [String: Any] {
+                    let from = JSON["from"] as! String
+                    print(from)
+                    let to = JSON["to"] as! String
+                    print(to)
+                    
+                    
+                    if let transResult = JSON["trans_result"] as? [[String: Any]] {
+                        if let dst = transResult.first?["dst"] as? String {
+                            print(dst)
+                        }
+                        if let src = transResult.first?["src"] as? String {
+                            print(src)
+                        }
+                    }
+                    
+                }
+                case .failure(_):
+                debugPrint("!!! response.request failure")
+                    guard let data = response.data, let localRateLimited = String(data: data, encoding: .utf8) else { return }
+                    do {
+                        print(data)
+                    } catch {
+                        print(localRateLimited)
+                    }
+                }
         }
     }
 
 }
 
-struct BodyResult: Codable {
+
+
+struct TranslationResponse: Codable {
     let from: String
     let to: String
+    let transResult: [TranslationResult]
+    
+    enum CodingKeys: String, CodingKey {
+        case from, to
+        case transResult = "trans_result"
+    }
 }
 
-struct Person: Codable {
-    let name: String
-    let age: Int
-    let isMarried: Bool
-    let hobbies: [String]
+struct TranslationResult: Codable {
+    let dst: String
+    let src: String
 }
+
 //struct ViewWordsListInsert_Previews: PreviewProvider {
 //    static var previews: some View {
 //        ViewWordsListInsert()
