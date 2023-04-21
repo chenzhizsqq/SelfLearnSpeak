@@ -108,7 +108,7 @@ struct ViewWordsListInsert: View {
                         .padding(.horizontal)
                     Button("翻译") {
                         if(!input_text.isEmpty){
-                            getfanyi(from: "jp" ,to: "zh", 被翻译内容: input_text, type: "jp2zh")
+                            getfanyi(from: "jp" ,to: "zh", text: input_text, type: "jp2zh", mvvm: transViewModel)
                         }else{
                             debugPrint("!!! input_text.isEmpty")
                         }
@@ -131,7 +131,7 @@ struct ViewWordsListInsert: View {
                         .padding(.horizontal)
                     Button("翻译") {
                         if(!description_text.isEmpty){
-                            getfanyi(from: "zh" ,to: "jp", 被翻译内容: description_text, type: "zh2jp")
+                            getfanyi(from: "zh" ,to: "jp", text: description_text, type: "zh2jp", mvvm: transViewModel)
                         }else{
                             debugPrint("!!! description_text.isEmpty")
                         }
@@ -169,7 +169,7 @@ struct ViewWordsListInsert: View {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
     
-    func getfanyi(from:String,to:String,被翻译内容:String,type:String) {
+    func getfanyi(from:String,to:String,text:String,type:String,mvvm:TransViewModel) {
         
         let 你的APPID = EnvironmentModel.baiduFanyiAppId
         let 你的密钥 = EnvironmentModel.baiduFanyiKey
@@ -178,9 +178,9 @@ struct ViewWordsListInsert: View {
         let 随机数 = String(UInt64.random(in: 1000000000...2000000000))
         
         //加密方法在另一个文件
-        let 加密 = "\(你的APPID)\(被翻译内容)\(随机数)\(你的密钥)".DDMD5Encrypt(.lowercase32)
+        let 加密 = "\(你的APPID)\(text)\(随机数)\(你的密钥)".DDMD5Encrypt(.lowercase32)
         
-        let 编码 = 被翻译内容.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+        let 编码 = text.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
             
         let 网址 = "https://fanyi-api.baidu.com/api/trans/vip/translate?"+"q=\(编码!)&from=\(from)&to=\(to)&appid=\(你的APPID)&salt=\(随机数)&sign=\(加密)"
         
@@ -199,10 +199,10 @@ struct ViewWordsListInsert: View {
                 if let dst = data.transResult.first?.dst as? String {
                     print(dst)
                     if(type=="jp2zh"){
-                        transViewModel.zh = dst
+                        mvvm.zh = dst
                     }
                     if(type=="zh2jp"){
-                        transViewModel.jp = dst
+                        mvvm.jp = dst
                     }
                 }
             case .failure(let error):
