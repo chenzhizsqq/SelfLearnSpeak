@@ -34,7 +34,4 @@ class EnvironmentModel:ObservableObject{
     //realm Version
     @Published var realmVersion = 1
     
-    static let baiduFanyiAppId = "20211218001031744"
-    static let baiduFanyiKey = "sciKrOsAy6QmASY4fC1g"
-    
 }

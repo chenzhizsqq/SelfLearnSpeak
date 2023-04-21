@@ -19,6 +19,7 @@
 		33B0288929F1294F003B55AD /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 33B0288829F1294F003B55AD /* Alamofire */; };
 		33B0288C29F12A27003B55AD /* Crypto in Frameworks */ = {isa = PBXBuildFile; productRef = 33B0288B29F12A27003B55AD /* Crypto */; };
 		33B0289129F12CD7003B55AD /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 33B0289029F12CD7003B55AD /* CryptoSwift */; };
+		33B0289329F29298003B55AD /* BaiduFanyiAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0289229F29298003B55AD /* BaiduFanyiAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		3389B1BC29EFB88A009EA217 /* ViewWordsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewWordsList.swift; sourceTree = "<group>"; };
 		33B0288329F110FD003B55AD /* EnvironmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentModel.swift; sourceTree = "<group>"; };
 		33B0288529F115AA003B55AD /* ViewWordsListInsert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewWordsListInsert.swift; sourceTree = "<group>"; };
+		33B0289229F29298003B55AD /* BaiduFanyiAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaiduFanyiAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				3389B1BC29EFB88A009EA217 /* ViewWordsList.swift */,
 				33B0288529F115AA003B55AD /* ViewWordsListInsert.swift */,
 				3389B1A629EFB069009EA217 /* ContentView.swift */,
+				33B0289229F29298003B55AD /* BaiduFanyiAPI.swift */,
 				3389B1A829EFB06C009EA217 /* Assets.xcassets */,
 				33B0288329F110FD003B55AD /* EnvironmentModel.swift */,
 				3389B1AA29EFB06C009EA217 /* Preview Content */,
@@ -181,6 +184,7 @@
 				33B0288629F115AA003B55AD /* ViewWordsListInsert.swift in Sources */,
 				3389B1BD29EFB88A009EA217 /* ViewWordsList.swift in Sources */,
 				3389B1A529EFB069009EA217 /* SelfLearnSpeakApp.swift in Sources */,
+				33B0289329F29298003B55AD /* BaiduFanyiAPI.swift in Sources */,
 				33B0288429F110FD003B55AD /* EnvironmentModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
