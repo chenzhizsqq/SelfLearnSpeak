@@ -16,6 +16,9 @@
 		3389B1BD29EFB88A009EA217 /* ViewWordsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3389B1BC29EFB88A009EA217 /* ViewWordsList.swift */; };
 		33B0288429F110FD003B55AD /* EnvironmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0288329F110FD003B55AD /* EnvironmentModel.swift */; };
 		33B0288629F115AA003B55AD /* ViewWordsListInsert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0288529F115AA003B55AD /* ViewWordsListInsert.swift */; };
+		33B0288929F1294F003B55AD /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 33B0288829F1294F003B55AD /* Alamofire */; };
+		33B0288C29F12A27003B55AD /* Crypto in Frameworks */ = {isa = PBXBuildFile; productRef = 33B0288B29F12A27003B55AD /* Crypto */; };
+		33B0289129F12CD7003B55AD /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 33B0289029F12CD7003B55AD /* CryptoSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,8 +37,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33B0288929F1294F003B55AD /* Alamofire in Frameworks */,
 				3389B1B629EFB287009EA217 /* RealmSwift in Frameworks */,
 				3389B1B429EFB287009EA217 /* Realm in Frameworks */,
+				33B0289129F12CD7003B55AD /* CryptoSwift in Frameworks */,
+				33B0288C29F12A27003B55AD /* Crypto in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +53,7 @@
 			children = (
 				3389B1A329EFB069009EA217 /* SelfLearnSpeak */,
 				3389B1A229EFB069009EA217 /* Products */,
+				33B0288729F1294F003B55AD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,6 +87,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		33B0288729F1294F003B55AD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -99,6 +113,9 @@
 			packageProductDependencies = (
 				3389B1B329EFB287009EA217 /* Realm */,
 				3389B1B529EFB287009EA217 /* RealmSwift */,
+				33B0288829F1294F003B55AD /* Alamofire */,
+				33B0288B29F12A27003B55AD /* Crypto */,
+				33B0289029F12CD7003B55AD /* CryptoSwift */,
 			);
 			productName = SelfLearnSpeak;
 			productReference = 3389B1A129EFB069009EA217 /* SelfLearnSpeak.app */;
@@ -131,6 +148,8 @@
 			packageReferences = (
 				3389B1B229EFB287009EA217 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				3389B1B729EFB2AE009EA217 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				33B0288A29F12A27003B55AD /* XCRemoteSwiftPackageReference "swift-crypto" */,
+				33B0288F29F12CD7003B55AD /* XCRemoteSwiftPackageReference "CryptoSwift" */,
 			);
 			productRefGroup = 3389B1A229EFB069009EA217 /* Products */;
 			projectDirPath = "";
@@ -383,6 +402,22 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		33B0288A29F12A27003B55AD /* XCRemoteSwiftPackageReference "swift-crypto" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-crypto.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		33B0288F29F12CD7003B55AD /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -395,6 +430,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3389B1B229EFB287009EA217 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		33B0288829F1294F003B55AD /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3389B1B729EFB2AE009EA217 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		33B0288B29F12A27003B55AD /* Crypto */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 33B0288A29F12A27003B55AD /* XCRemoteSwiftPackageReference "swift-crypto" */;
+			productName = Crypto;
+		};
+		33B0289029F12CD7003B55AD /* CryptoSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 33B0288F29F12CD7003B55AD /* XCRemoteSwiftPackageReference "CryptoSwift" */;
+			productName = CryptoSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
