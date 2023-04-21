@@ -140,7 +140,7 @@ struct ItemsView: View {
             }
         }
         .sheet(isPresented: $showSecondView){
-            ViewWordsListInsert(itemGroup: itemGroup, input_text: $input_text, description_text: $description_text)
+            ViewWordsListInsert(itemGroup: itemGroup, input_text: $input_text, description_text: $description_text, showSecondView: $showSecondView)
         }
     }
 }

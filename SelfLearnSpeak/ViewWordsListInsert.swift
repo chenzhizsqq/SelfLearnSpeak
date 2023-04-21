@@ -79,6 +79,8 @@ struct ViewWordsListInsert: View {
     @EnvironmentObject var envModel: EnvironmentModel
     @Binding var input_text : String
     @Binding var description_text: String
+    @Binding var showSecondView: Bool
+    @StateObject var transViewModel = TransViewModel()
     var body: some View {
         
         ScrollView{
@@ -95,6 +97,7 @@ struct ViewWordsListInsert: View {
                     $itemGroup.items.append(item)
                     input_text = ""
                     description_text = ""
+                    self.showSecondView = false
                     }
                 .buttonStyle(CustomButtonStyle(padding: 10))
                 .padding()
@@ -105,7 +108,7 @@ struct ViewWordsListInsert: View {
                         .padding(.horizontal)
                     Button("翻译") {
                         if(!input_text.isEmpty){
-                            getfanyi(from: "jp" ,to: "zh", 被翻译内容: input_text)
+                            getfanyi(from: "jp" ,to: "zh", 被翻译内容: input_text, type: "jp2zh")
                         }else{
                             debugPrint("!!! input_text.isEmpty")
                         }
@@ -128,7 +131,7 @@ struct ViewWordsListInsert: View {
                         .padding(.horizontal)
                     Button("翻译") {
                         if(!description_text.isEmpty){
-                            getfanyi2(from: "zh" ,to: "jp", 被翻译内容: description_text)
+                            getfanyi(from: "zh" ,to: "jp", 被翻译内容: description_text, type: "zh2jp")
                         }else{
                             debugPrint("!!! description_text.isEmpty")
                         }
@@ -148,13 +151,25 @@ struct ViewWordsListInsert: View {
         .onTapGesture {
             hideKeyboard()
         }
+        .onChange(of: transViewModel.jp) { newValue in
+            // 这里可以响应myValue变化时的操作
+            debugPrint("transViewModel.jp")
+            input_text = newValue
+            debugPrint(newValue)
+        }
+        .onChange(of: transViewModel.zh) { newValue in
+            // 这里可以响应myValue变化时的操作
+            debugPrint("transViewModel.zh")
+            description_text = newValue
+            debugPrint(newValue)
+        }
     }
     
     private func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
     
-    func getfanyi(from:String,to:String,被翻译内容:String) {
+    func getfanyi(from:String,to:String,被翻译内容:String,type:String) {
         
         let 你的APPID = EnvironmentModel.baiduFanyiAppId
         let 你的密钥 = EnvironmentModel.baiduFanyiKey
@@ -183,44 +198,12 @@ struct ViewWordsListInsert: View {
                 }
                 if let dst = data.transResult.first?.dst as? String {
                     print(dst)
-                    description_text = dst
-                }
-            case .failure(let error):
-                debugPrint("!!! response.request failed: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    func getfanyi2(from:String,to:String,被翻译内容:String) {
-        
-        let 你的APPID = EnvironmentModel.baiduFanyiAppId
-        let 你的密钥 = EnvironmentModel.baiduFanyiKey
-        
-        //let 随机数 = "1435660288"
-        let 随机数 = String(UInt64.random(in: 1000000000...2000000000))
-        
-        //加密方法在另一个文件
-        let 加密 = "\(你的APPID)\(被翻译内容)\(随机数)\(你的密钥)".DDMD5Encrypt(.lowercase32)
-        
-        let 编码 = 被翻译内容.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
-            
-        let 网址 = "https://fanyi-api.baidu.com/api/trans/vip/translate?"+"q=\(编码!)&from=\(from)&to=\(to)&appid=\(你的APPID)&salt=\(随机数)&sign=\(加密)"
-        
-        //发送请求
-        AF.request(网址).responseDecodable(of: TranslationResponse.self) { response in
-            switch response.result {
-            case .success(let data):
-                debugPrint("!!! response.request success")
-                print(data.from)
-                print(data.to)
-                print(data.transResult)
-                
-                if let src = data.transResult.first?.src as? String {
-                    print(src)
-                }
-                if let dst = data.transResult.first?.dst as? String {
-                    print(dst)
-                    input_text = dst
+                    if(type=="jp2zh"){
+                        transViewModel.zh = dst
+                    }
+                    if(type=="zh2jp"){
+                        transViewModel.jp = dst
+                    }
                 }
             case .failure(let error):
                 debugPrint("!!! response.request failed: \(error.localizedDescription)")
@@ -230,7 +213,11 @@ struct ViewWordsListInsert: View {
 
 }
 
-
+class TransViewModel: ObservableObject {
+    
+    @Published  var zh: String = ""
+    @Published  var jp: String = ""
+}
 
 struct TranslationResponse: Codable {
     let from: String
