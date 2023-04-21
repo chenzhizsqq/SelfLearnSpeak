@@ -112,7 +112,7 @@ struct ViewWordsListInsert: View {
             }.padding(20)
             
             Button("翻译") {
-                getfanyi(你的APPID: "20211218001031744", 你的密钥: "sciKrOsAy6QmASY4fC1g")
+                getfanyi(你的APPID: "20211218001031744", 你的密钥: "sciKrOsAy6QmASY4fC1g",from: "zh",to: "en", 被翻译内容: "请翻译一下")
             }
             .padding()
             
@@ -142,72 +142,37 @@ struct ViewWordsListInsert: View {
         }.padding()
     }
     
-    func getfanyi(你的APPID:String,你的密钥:String){
+    func getfanyi(你的APPID:String,你的密钥:String,from:String,to:String,被翻译内容:String){
         
-        //当前为英翻中
-        let 正文 = "苹果"
         
         //let 随机数 = "1435660288"
         let 随机数 = String(UInt64.random(in: 1000000000...9999999999))
         
         //加密方法在另一个文件
-        let 加密 = "\(你的APPID)\(正文)\(随机数)\(你的密钥)".DDMD5Encrypt(.lowercase32)
+        let 加密 = "\(你的APPID)\(被翻译内容)\(随机数)\(你的密钥)".DDMD5Encrypt(.lowercase32)
         
-        let 编码 = 正文.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+        let 编码 = 被翻译内容.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
             
-        let 网址 = "https://fanyi-api.baidu.com/api/trans/vip/translate?"+"q=\(编码!)&from=zh&to=en&appid=\(你的APPID)&salt=\(随机数)&sign=\(加密)"
+        let 网址 = "https://fanyi-api.baidu.com/api/trans/vip/translate?"+"q=\(编码!)&from=\(from)&to=\(to)&appid=\(你的APPID)&salt=\(随机数)&sign=\(加密)"
         
         //发送请求
-        AF.request(网址,
-                   method: .post,
-                   parameters: nil,
-                   encoding: JSONEncoding.default).responseJSON { response in
-            
-            debugPrint("!!! response")
-            debugPrint(response)
-            
-            debugPrint("!!! response.result")
-            debugPrint(response.result)
-            
-            debugPrint("!!! response.value")
-            debugPrint(response.value)
-            
-            debugPrint("!!! response.request")
-            debugPrint(response.request)
-            
-            debugPrint("!!! response.request switch ！！！！！！！！！！！！！！！！！！！1")
-            
+        AF.request(网址).responseDecodable(of: TranslationResponse.self) { response in
             switch response.result {
-                case .success(let data):
+            case .success(let data):
                 debugPrint("!!! response.request success")
-                    print(data)
+                print(data.from)
+                print(data.to)
+                print(data.transResult)
                 
-                if let JSON = data as? [String: Any] {
-                    let from = JSON["from"] as! String
-                    print(from)
-                    let to = JSON["to"] as! String
-                    print(to)
-                    
-                    
-                    if let transResult = JSON["trans_result"] as? [[String: Any]] {
-                        if let dst = transResult.first?["dst"] as? String {
-                            print(dst)
-                        }
-                        if let src = transResult.first?["src"] as? String {
-                            print(src)
-                        }
-                    }
-                    
+                if let dst = data.transResult.first?.src as? String {
+                    print(dst)
                 }
-                case .failure(_):
-                debugPrint("!!! response.request failure")
-                    guard let data = response.data, let localRateLimited = String(data: data, encoding: .utf8) else { return }
-                    do {
-                        print(data)
-                    } catch {
-                        print(localRateLimited)
-                    }
+                if let src = data.transResult.first?.dst as? String {
+                    print(src)
                 }
+            case .failure(let error):
+                debugPrint("!!! response.request failed: \(error.localizedDescription)")
+            }
         }
     }
 
