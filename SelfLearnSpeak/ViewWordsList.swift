@@ -154,7 +154,7 @@ struct ItemRow: View {
     var body: some View {
         // You can click an item in the list to navigate to an edit details screen.
         HStack{
-            NavigationLink(destination: ItemDetailsView(item: item)) {
+            NavigationLink(destination: ItemDetailsView(item: item,input_text:$item.name,description_text:$item.itemDescription)) {
                 VStack{
                     HStack{
                         

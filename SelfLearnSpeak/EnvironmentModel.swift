@@ -31,6 +31,22 @@ class EnvironmentModel:ObservableObject{
         synthesizer.speak(utterance)
     }
     
+    
+    func text2speech(_ text: String,language languageCode: String?) {
+        let utterance = AVSpeechUtterance(string: text)
+        utterance.voice = AVSpeechSynthesisVoice(language: languageCode)
+//        utterance.voice = AVSpeechSynthesisVoice(identifier: AVSpeechSynthesisVoiceIdentifierAlex)
+        utterance.rate = 0.4
+//        utterance.pitchMultiplier = 1.0
+        
+        //声音停止
+        synthesizer.stopSpeaking(at: .immediate)
+        
+        //声音播放
+        synthesizer.speak(utterance)
+    }
+    
+    
     //realm Version
     @Published var realmVersion = 1
     

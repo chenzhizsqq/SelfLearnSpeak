@@ -13,6 +13,9 @@ import AVFoundation
 /// Represents a screen where you can edit the item's name.
 struct ItemDetailsView: View {
     @ObservedRealmObject var item: Item
+    @EnvironmentObject var envModel: EnvironmentModel
+    @Binding var input_text : String
+    @Binding var description_text: String
     @StateObject var transViewModel = TransViewModel()
     var body: some View {
         ScrollView{
@@ -22,13 +25,18 @@ struct ItemDetailsView: View {
                         .textFieldStyle(DefaultTextFieldStyle())
                         .padding(.horizontal)
                     Button("翻译") {
-                        if(!item.name.isEmpty){
-                            BaiduFanyiAPI.getfanyi(from: "jp" ,to: "zh", text: item.name, type: "jp2zh", mvvm: transViewModel)
+                        if(!input_text.isEmpty){
+                            BaiduFanyiAPI.getfanyi(from: "jp" ,to: "zh", text: input_text, type: "jp2zh", mvvm: transViewModel)
                         }else{
                             debugPrint("!!! input_text.isEmpty")
                         }
                     }
                     .padding(.horizontal)
+                    
+                    Button(action: {
+                        envModel.text2speech(input_text)
+                    }) { Image(systemName: "speaker.wave.3") }
+                        .buttonStyle(CustomButtonStyle(padding: 5))
                 }
                 
                 // Accept a new name
@@ -45,13 +53,18 @@ struct ItemDetailsView: View {
                         .textFieldStyle(DefaultTextFieldStyle())
                         .padding(.horizontal)
                     Button("翻译") {
-                        if(!item.itemDescription.isEmpty){
-                            BaiduFanyiAPI.getfanyi(from: "zh" ,to: "jp", text: item.itemDescription, type: "zh2jp", mvvm: transViewModel)
+                        if(!description_text.isEmpty){
+                            BaiduFanyiAPI.getfanyi(from: "zh" ,to: "jp", text: description_text, type: "zh2jp", mvvm: transViewModel)
                         }else{
                             debugPrint("!!! description_text.isEmpty")
                         }
                     }
                     .padding(.horizontal)
+                    
+                    Button(action: {
+                        envModel.text2speech(description_text)
+                    }) { Image(systemName: "speaker.wave.3") }
+                        .buttonStyle(CustomButtonStyle(padding: 5))
                 }
                 
                 
@@ -70,13 +83,13 @@ struct ItemDetailsView: View {
         .onChange(of: transViewModel.jp) { newValue in
             // 这里可以响应myValue变化时的操作
             debugPrint("transViewModel.jp")
-            item.name = newValue
+            input_text = newValue
             debugPrint(newValue)
         }
         .onChange(of: transViewModel.zh) { newValue in
             // 这里可以响应myValue变化时的操作
             debugPrint("transViewModel.zh")
-            item.itemDescription = newValue
+            description_text = newValue
             debugPrint(newValue)
         }
         .padding()

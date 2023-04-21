@@ -56,6 +56,11 @@ struct ViewWordsListInsert: View {
                         }
                     }
                     .padding(.horizontal)
+                    
+                    Button(action: {
+                        envModel.text2speech(input_text)
+                    }) { Image(systemName: "speaker.wave.3") }
+                        .buttonStyle(CustomButtonStyle(padding: 5))
                 }
                 .padding()
                 
@@ -79,6 +84,11 @@ struct ViewWordsListInsert: View {
                         }
                     }
                     .padding(.horizontal)
+                    
+                    Button(action: {
+                        envModel.text2speech(description_text)
+                    }) { Image(systemName: "speaker.wave.3") }
+                        .buttonStyle(CustomButtonStyle(padding: 5))
                 }
                 
                 TextEditor(text: $description_text)
