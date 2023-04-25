@@ -176,7 +176,7 @@ struct ItemRow: View {
                     // 在这里添加操作
                     print("Sheet onDismiss")
                 }, content: {
-                    ItemDetailsView(item: item,input_text:$item.name,description_text:$item.itemDescription, showSecondView: $showSecondItemRowView)
+                    ItemDetailsView(isFavorite:$item.isFavorite,input_text:$item.name,description_text:$item.itemDescription, showSecondView: $showSecondItemRowView)
                 })
             
             

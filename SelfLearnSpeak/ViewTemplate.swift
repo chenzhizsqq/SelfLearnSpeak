@@ -10,8 +10,8 @@ import RealmSwift
 import AVFoundation
 
 struct ViewTemplate: View {
-    @ObservedRealmObject var item: Item
     @EnvironmentObject var envModel: EnvironmentModel
+    @Binding var isFavorite: Bool
     @Binding var showSecondView: Bool
     @Binding var input_text : String
     @Binding var description_text: String
@@ -21,8 +21,8 @@ struct ViewTemplate: View {
             
             HStack{
                 HStack{
-                    Toggle(isOn: $item.isFavorite) {
-                        Image(systemName: item.isFavorite ? "heart.fill" : "heart")
+                    Toggle(isOn: $isFavorite) {
+                        Image(systemName: isFavorite ? "heart.fill" : "heart")
                     }
                 }.frame(width: 50)
                 Text("日文")
@@ -44,7 +44,7 @@ struct ViewTemplate: View {
             }.frame(height: 50)
             
             // Accept a new name
-            TextEditor(text: $item.name)
+            TextEditor(text: $input_text)
                 .autocapitalization(.none)
                 .frame(height: 150)
                 .overlay(RoundedRectangle(cornerRadius: 5).stroke(.gray, lineWidth: 1))
@@ -72,7 +72,7 @@ struct ViewTemplate: View {
             }
             
             
-            TextEditor(text: $item.itemDescription)
+            TextEditor(text: $description_text)
                 .autocapitalization(.none)
                 .frame(height: 150)
                 .overlay(RoundedRectangle(cornerRadius: 5).stroke(.gray, lineWidth: 1))
