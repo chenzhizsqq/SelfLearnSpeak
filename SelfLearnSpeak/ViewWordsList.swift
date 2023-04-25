@@ -100,6 +100,7 @@ struct ItemsView: View {
     ///是否显示第二个页面
     @State private var showSecondView = false
     
+    @State var isFavorite = false
     @State var input_text = ""
     @State var description_text: String = ""
     //@State var all_text = ""
@@ -140,7 +141,7 @@ struct ItemsView: View {
             }
         }
         .sheet(isPresented: $showSecondView){
-            ViewWordsListInsert(itemGroup: itemGroup, input_text: $input_text, description_text: $description_text, showSecondView: $showSecondView)
+            ViewWordsListInsert(itemGroup: itemGroup, isFavorite: $isFavorite, input_text: $input_text, description_text: $description_text, showSecondView: $showSecondView)
         }
     }
 }
@@ -156,37 +157,38 @@ struct ItemRow: View {
     
     var body: some View {
         // You can click an item in the list to navigate to an edit details screen.
-        HStack{
-//            NavigationLink(destination: ItemDetailsView(item: item,input_text:$item.name,description_text:$item.itemDescription)) {
-                VStack{
-                    HStack{
-                        
-                        Text(item.name)
-                        if item.isFavorite {
-                            // If the user "favorited" the item, display a heart icon
-                            Image(systemName: "heart.fill")
-                        }
-                    }
-                    
-                    Text(item.itemDescription)
-                }.onTapGesture {
-                    showSecondItemRowView = true
+        VStack{
+            HStack{
+                
+                Text(item.name)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                if item.isFavorite {
+                    // If the user "favorited" the item, display a heart icon
+                    Image(systemName: "heart.fill")
                 }
-                .sheet(isPresented: $showSecondItemRowView, onDismiss: {
-                    // 在这里添加操作
-                    print("Sheet onDismiss")
-                }, content: {
-                    ItemDetailsView(isFavorite:$item.isFavorite,input_text:$item.name,description_text:$item.itemDescription, showSecondView: $showSecondItemRowView)
-                })
-            
-            
-            Button(action: {
-                envModel.text2speech(item.name)
-            }) { Image(systemName: "speaker.wave.3") }
-                .buttonStyle(CustomButtonStyle(padding: 5))
+                Button(action: {
+                    envModel.text2speech(item.name)
+                }) { Image(systemName: "speaker.wave.3") }
+                    .buttonStyle(CustomButtonStyle(padding: 5))
+            }
+            Text(item.itemDescription)
+                .foregroundColor(.brown)
+                .font(.system(size: 20))
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .fixedSize(horizontal: false, vertical: true)
+        .onTapGesture {
+            showSecondItemRowView = true
+        }
+        .sheet(isPresented: $showSecondItemRowView, onDismiss: {
+            // 在这里添加操作
+            print("Sheet onDismiss")
+        }, content: {
+            ItemDetailsView(isFavorite:$item.isFavorite,input_text:$item.name,description_text:$item.itemDescription, showSecondView: $showSecondItemRowView)
+        })
     }
 }
+
 
 // MARK: - 选择按钮的模板
 struct CustomButtonStyle: ButtonStyle {
