@@ -149,12 +149,15 @@ struct ItemsView: View {
 struct ItemRow: View {
     @ObservedRealmObject var item: Item
     
+    ///是否显示第二个页面
+    @State private var showSecondItemRowView = false
+    
     @EnvironmentObject var envModel: EnvironmentModel
     
     var body: some View {
         // You can click an item in the list to navigate to an edit details screen.
         HStack{
-            NavigationLink(destination: ItemDetailsView(item: item,input_text:$item.name,description_text:$item.itemDescription)) {
+//            NavigationLink(destination: ItemDetailsView(item: item,input_text:$item.name,description_text:$item.itemDescription)) {
                 VStack{
                     HStack{
                         
@@ -166,8 +169,15 @@ struct ItemRow: View {
                     }
                     
                     Text(item.itemDescription)
+                }.onTapGesture {
+                    showSecondItemRowView = true
                 }
-            }
+                .sheet(isPresented: $showSecondItemRowView, onDismiss: {
+                    // 在这里添加操作
+                    print("Sheet onDismiss")
+                }, content: {
+                    ItemDetailsView(item: item,input_text:$item.name,description_text:$item.itemDescription, showSecondView: $showSecondItemRowView)
+                })
             
             
             Button(action: {
