@@ -48,6 +48,6 @@ class EnvironmentModel:ObservableObject{
     
     
     //realm Version
-    @Published var realmVersion = 1
+    @Published var realmVersion = 2
     
 }
