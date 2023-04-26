@@ -16,7 +16,7 @@ struct SelfLearnSpeakApp: App {
     var body: some Scene {
         WindowGroup {
             //ContentView()
-            ViewWordsList()
+            ViewMenu()
                 .environmentObject(envModel)
         }
     }
