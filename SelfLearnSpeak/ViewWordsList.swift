@@ -39,6 +39,7 @@ final class TableGroup: Object, ObjectKeyIdentifiable {
     /// The unique ID of the ItemGroup. `primaryKey: true` declares the
     /// _id member as the primary key to the realm.
     @Persisted(primaryKey: true) var _id: ObjectId
+    @Persisted var tableName = ""
     /// The collection of Items in this group.
     @Persisted var tables = RealmSwift.List<ItemGroup>()
     
@@ -49,7 +50,7 @@ extension Item {
     static let item3 = Item(value: ["name": "classy mouse pad", "isFavorite": false, "ownerId": "previewRealm"])
 }
 extension ItemGroup {
-    static let group = ItemGroup(value: ["items": [Item.item1, Item.item2, Item.item3]])
+    static let group = ItemGroup(value: ["items": [Item.item1, Item.item2, Item.item3],"tableName": "previewRealm"])
 }
 
 extension TableGroup {
@@ -64,13 +65,14 @@ extension TableGroup {
             // Check to see whether the in-memory realm already contains an ItemGroup.
             // If it does, we'll just return the existing realm.
             // If it doesn't, we'll add an ItemGroup and append the Items.
-            let realmObjects = realm.objects(ItemGroup.self)
+            let realmObjects = realm.objects(TableGroup.self)
             if realmObjects.count == 1 {
                 return realm
             } else {
                 try realm.write {
                     realm.add(tableGroup)
                     tableGroup.tables.append(objectsIn: [ItemGroup.group])
+                    tableGroup.tableName.append("previewRealm")
                 }
                 return realm
             }
@@ -117,10 +119,24 @@ struct ViewWordsList: View {
     init() {
         debugPrint("ViewWordsList !!!")
         print(Realm.Configuration.defaultConfiguration.fileURL!)
+        
+        if(tableGroups.count>0){
+            
+            let realm = try! Realm()
+
+            let tableGroup = realm.objects(TableGroup.self)
+
+            try! realm.write {
+                realm.delete(tableGroup)
+            }
+        }else{
+            //$tableGroups.append(TableGroup())
+            
+        }
         $tableGroups.append(TableGroup())
+        
         print(itemGroups)
         print(tableGroups)
-        print(tableGroups.first)
         
         let fileManager = FileManager.default
         let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!

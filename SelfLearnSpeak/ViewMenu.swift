@@ -14,8 +14,8 @@ struct ViewMenu: View {
     @EnvironmentObject var envModel: EnvironmentModel
     
     init() {
-        RealmClassUpdate(className: "tableRealm",CurrentSchemaVersion: 2 )
-        RealmClassUpdate(className: "previewRealm",CurrentSchemaVersion: 2 )
+        RealmClassUpdate(className: "tableRealm",CurrentSchemaVersion: 5 )
+        RealmClassUpdate(className: "previewRealm",CurrentSchemaVersion: 5 )
         print(Realm.Configuration.defaultConfiguration.fileURL!)
     }
     
