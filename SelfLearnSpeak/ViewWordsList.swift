@@ -133,7 +133,7 @@ struct ViewWordsList: View {
             //$tableGroups.append(TableGroup())
             
         }
-        $tableGroups.append(TableGroup())
+        //$tableGroups.append(TableGroup())
         
         print(itemGroups)
         print(tableGroups)
