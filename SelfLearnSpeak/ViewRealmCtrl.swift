@@ -37,7 +37,7 @@ struct ViewRealmCtrl: View {
                     if let selectedTable = selectedTable {
                         let objectSchema = realm.schema.objectSchema.first(where: { $0.className == selectedTable })
                         let propertyList = objectSchema?.properties.map({ $0.name })
-                        print(propertyList)
+                        print("\(String(describing: propertyList))")
                         let combinedString = propertyList!.joined(separator: " , ")
                         print(combinedString)
                         
@@ -83,12 +83,17 @@ struct ViewRealmCtrl: View {
             
             
             Group{
-                
-                
                 Button("log") {
+                    print("viewModel.realm.configuration.inMemoryIdentifier")
+                    print(String(describing: viewModel.realm.configuration.inMemoryIdentifier))
                     
+                    print("itemData")
                     print(itemData)
+                    
+                    print("itemGroupData")
                     print(itemGroupData)
+                    
+                    print("tableGroupsData")
                     print(tableGroupsData)
                 }.padding()
                 
@@ -142,19 +147,12 @@ struct ViewRealmCtrl: View {
 }
 
 class ViewModel: ObservableObject {
-    private let realm = try! Realm()
+    let realm = try! Realm()
     var tables: [String] {
         return realm.schema.objectSchema.map { $0.className }
     }
     var tablesDescription: [String] {
         return realm.schema.objectSchema.map { $0.description }
-    }
-    
-    func printTableData(_ tableName: String) {
-        guard let table = realm.objects(Object.self).filter("className = '\(tableName)'").first?.description else {
-            return
-        }
-        print(table)
     }
 
     func deleteAllTables() {
