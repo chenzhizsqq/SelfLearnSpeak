@@ -14,6 +14,7 @@ struct ViewRealmCtrl: View {
     @StateObject var viewModel = ViewModel()
     @State var selectedTable: String?
     @State private var isPresentingSheet = false
+    @State private var showAllDeleteAlert = false
     @State var sheetText = ""
     var realm : Realm
     //@State var res: String
@@ -26,7 +27,8 @@ struct ViewRealmCtrl: View {
 
     var body: some View {
         VStack {
-            Button("properties 结构") {
+            Divider().padding()
+            Button("properties 结构 \n选择后，点击查看") {
                 if let selectedTable = selectedTable {
                     let objectSchema = realm.schema.objectSchema.first(where: { $0.className == selectedTable })
                     let propertyList = objectSchema?.properties.map({ $0.name })
@@ -39,7 +41,8 @@ struct ViewRealmCtrl: View {
 
                 }
             }
-            Button("description 属性") {
+            Divider().padding()
+            Button("description 属性 \n选择后，点击查看") {
                 if let selectedTable = selectedTable {
                     let objectSchema = realm.schema.objectSchema.first(where: { $0.className == selectedTable })
                     let propertyList = objectSchema?.description.map({ $0.description })
@@ -58,8 +61,17 @@ struct ViewRealmCtrl: View {
                 //Text(res)
             
             Button("Delete All Tables") {
-                viewModel.deleteAllTables()
+                //viewModel.deleteAllTables()
+                showAllDeleteAlert.toggle()
             }
+        }
+        .alert(isPresented: $showAllDeleteAlert) {
+            Alert(title: Text("删除所有数据"),
+                  message: Text("确认删除所有数据吗?"),
+                  primaryButton: .destructive(Text("删除")) {
+                        viewModel.deleteAllTables()
+                  },
+                  secondaryButton: .cancel(Text("取消")))
         }
         .sheet(isPresented: $isPresentingSheet, content: {
             NavigationView {

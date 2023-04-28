@@ -34,10 +34,17 @@ struct ViewMenu: View {
         NavigationView {
             ScrollView{
                 VStack {
-                        
+                    
+                    Divider().padding()
                     NavigationLink(destination:
                                     ViewWordsList()) {
                         Text("ViewWordsList")
+                    }
+                    
+                    Divider().padding()
+                    NavigationLink(destination:
+                                    ViewRealmCtrl()) {
+                        Text("数据库查询")
                     }
                 }
             }
