@@ -84,6 +84,11 @@ struct ViewRealmCtrl: View {
             
             Group{
                 Button("log") {
+                    //添加条件
+                    let realm = try! Realm()
+                    let people = realm.objects(Item.self).filter("isFavorite == true")
+                    print(people)
+                    
                     print("viewModel.realm.configuration.inMemoryIdentifier")
                     print(String(describing: viewModel.realm.configuration.inMemoryIdentifier))
                     
