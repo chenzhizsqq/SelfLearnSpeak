@@ -63,7 +63,12 @@ struct ViewRealmCtrl: View {
             Button("Delete All Tables") {
                 //viewModel.deleteAllTables()
                 showAllDeleteAlert.toggle()
-            }
+            }.padding()
+            
+        
+            Button("test") {
+                
+            }.padding()
         }
         .alert(isPresented: $showAllDeleteAlert) {
             Alert(title: Text("删除所有数据"),
