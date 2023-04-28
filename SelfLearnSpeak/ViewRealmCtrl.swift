@@ -24,51 +24,83 @@ struct ViewRealmCtrl: View {
         realm = try! Realm(configuration: config)
 
     }
-
+    
+    @ObservedResults(TableGroup.self) var tableGroupsData
+    @ObservedResults(ItemGroup.self) var itemGroupData
+    @ObservedResults(Item.self) var itemData
+    
     var body: some View {
         VStack {
-            Divider().padding()
-            Button("properties 结构 \n选择后，点击查看") {
-                if let selectedTable = selectedTable {
-                    let objectSchema = realm.schema.objectSchema.first(where: { $0.className == selectedTable })
-                    let propertyList = objectSchema?.properties.map({ $0.name })
-                    print(propertyList)
-                    let combinedString = propertyList!.joined(separator: " , ")
-                    print(combinedString)
-                    
-                    isPresentingSheet = true
-                    sheetText = combinedString
-
+            Group{
+                Divider().padding()
+                Button("properties 结构 \n选择后，点击查看") {
+                    if let selectedTable = selectedTable {
+                        let objectSchema = realm.schema.objectSchema.first(where: { $0.className == selectedTable })
+                        let propertyList = objectSchema?.properties.map({ $0.name })
+                        print(propertyList)
+                        let combinedString = propertyList!.joined(separator: " , ")
+                        print(combinedString)
+                        
+                        isPresentingSheet = true
+                        sheetText = combinedString
+                        
+                    }
+                }
+                Divider().padding()
+                Button("description 属性 \n选择后，点击查看") {
+                    if let selectedTable = selectedTable {
+                        let objectSchema = realm.schema.objectSchema.first(where: { $0.className == selectedTable })
+                        let propertyList = objectSchema?.description.map({ $0.description })
+                        
+                        let combinedString = propertyList!.joined(separator: "")
+                        print(combinedString)
+                        isPresentingSheet = true
+                        sheetText = combinedString
+                        
+                    }
+                }
+                Divider().padding()
+                Button("table的数据 \n选择后，点击查看") {
+                    if let selectedTable = selectedTable {
+                        switch selectedTable {
+                        case "Item":
+                            sheetText = observedResultsToString(itemData)
+                        case "ItemGroup":
+                            sheetText = observedResultsToString(itemGroupData)
+                        case "TableGroups" :
+                            sheetText = observedResultsToString(tableGroupsData)
+                        default:
+                            sheetText = ""
+                        }
+                        isPresentingSheet = true
+                        
+                    }
+                }
+                List(viewModel.tables, id: \.self, selection: $selectedTable) { table in
+                    Text(table)
                 }
             }
-            Divider().padding()
-            Button("description 属性 \n选择后，点击查看") {
-                if let selectedTable = selectedTable {
-                    let objectSchema = realm.schema.objectSchema.first(where: { $0.className == selectedTable })
-                    let propertyList = objectSchema?.description.map({ $0.description })
-                    
-                    let combinedString = propertyList!.joined(separator: "")
-                    print(combinedString)
-                    isPresentingSheet = true
-                    sheetText = combinedString
-
-                }
-            }
             
-            List(viewModel.tables, id: \.self, selection: $selectedTable) { table in
-                Text(table)
-            }
-                //Text(res)
             
-            Button("Delete All Tables") {
-                //viewModel.deleteAllTables()
-                showAllDeleteAlert.toggle()
-            }.padding()
-            
-        
-            Button("test") {
+            Group{
                 
-            }.padding()
+                
+                Button("log") {
+                    
+                    print(itemData)
+                    print(itemGroupData)
+                    print(tableGroupsData)
+                }.padding()
+                
+                
+                Button("Delete All Tables") {
+                    showAllDeleteAlert.toggle()
+                }.padding()
+                Button("Delete Table") {
+                    deleteTable(tableType: ItemGroup.self)
+                }.padding()
+            }
+            
         }
         .alert(isPresented: $showAllDeleteAlert) {
             Alert(title: Text("删除所有数据"),
@@ -84,6 +116,28 @@ struct ViewRealmCtrl: View {
                     .navigationBarTitle(selectedTable!)
             }
         })
+    }
+    
+    func deleteTable(tableType: Object.Type) {
+        do {
+            let realm = try! Realm()
+            let tableToDelete = realm.objects(tableType)
+            try realm.write {
+                realm.delete(tableToDelete)
+            }
+        } catch let error as NSError {
+            print("Error deleting table: \(error.localizedDescription)")
+        }
+    }
+    
+    
+    func observedResultsToString<T: Object>(_ results: Results<T>) -> String {
+        var resultString = ""
+        results.forEach { result in
+            resultString += result.description
+        }
+        return resultString
+        
     }
 }
 
