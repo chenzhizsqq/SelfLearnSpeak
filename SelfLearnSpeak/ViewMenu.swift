@@ -46,6 +46,13 @@ struct ViewMenu: View {
                                     ViewRealmCtrl()) {
                         Text("数据库查询")
                     }
+                    
+                    Divider().padding()
+                    NavigationLink(destination:
+                                    ViewTestMain()) {
+                        Text("ViewTestMain")
+                    }
+                    
                 }
             }
         }
