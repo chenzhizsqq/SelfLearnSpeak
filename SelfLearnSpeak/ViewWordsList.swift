@@ -21,6 +21,9 @@ final class Item: Object, ObjectKeyIdentifiable {
     /// Users can enter a description, which is an empty string by default
     @Persisted var itemDescription = ""
     
+    /// 主标题
+    @Persisted var Theme = ""
+    
     /// The backlink to the `ItemGroup` this item is a part of.
     @Persisted(originProperty: "items") var group: LinkingObjects<ItemGroup>
     
@@ -34,6 +37,30 @@ final class ItemGroup: Object, ObjectKeyIdentifiable {
     @Persisted var items = RealmSwift.List<Item>()
     
 }
+
+/// An individual item. Part of an `ThemeGroup`.
+final class Theme: Object, ObjectKeyIdentifiable {
+    /// The unique ID of the Item. `primaryKey: true` declares the
+    /// _id member as the primary key to the realm.
+    @Persisted(primaryKey: true) var _id: ObjectId
+    /// The name of the Item, By default
+    @Persisted var name = ""
+    @Persisted var isFavorite = false
+    @Persisted var aboveTxt = ""
+    @Persisted var belowTxt = ""
+    
+    /// The backlink to the `HeadingGroup` this item is a part of.
+    @Persisted(originProperty: "themes") var group: LinkingObjects<ThemeGroup>
+}
+/// Represents a collection of items.
+final class ThemeGroup: Object, ObjectKeyIdentifiable {
+    /// The unique ID of the ItemGroup. `primaryKey: true` declares the
+    /// _id member as the primary key to the realm.
+    @Persisted(primaryKey: true) var _id: ObjectId
+    /// The collection of Items in this group.
+    @Persisted var themes = RealmSwift.List<Theme>()
+}
+
 extension Item {
     static let item1 = Item(value: ["name": "fluffy coasters", "isFavorite": false, "ownerId": "previewRealm"])
     static let item2 = Item(value: ["name": "sudden cinder block", "isFavorite": true, "ownerId": "previewRealm"])
@@ -81,9 +108,6 @@ extension Item {
         Item(value: ["name": "履歴書の１０番目のプロジェクト。主な内容はモバイル開発です。"]),
         Item(value: ["name": "以上、私の自己紹介です。ありがとうございます。"]),
         ]
-}
-extension ItemGroup {
-    static let group = ItemGroup(value: ["items": [Item.item1, Item.item2, Item.item3],"tableName": "previewRealm"])
 }
 
 extension ItemGroup {
