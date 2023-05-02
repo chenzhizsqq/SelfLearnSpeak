@@ -167,6 +167,10 @@ class ViewModel: ObservableObject {
             let itemGroup = ItemGroup(value: ["ownerId": "previewRealm"])
             itemGroup.items.append(objectsIn: Item.IntroduceMyselfArray)
             realm.add(itemGroup)
+            
+            let themeTemp = ThemeGroup(value: ["ownerId": "previewRealm"])
+            themeTemp.themes.append(objectsIn: [Theme.theme1])
+            realm.add(themeTemp)
         }
     }
 }

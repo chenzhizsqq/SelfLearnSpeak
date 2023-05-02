@@ -7,6 +7,10 @@
 
 import SwiftUI
 import RealmSwift
+import CryptoSwift
+
+import Foundation
+import CommonCrypto
 
 struct ViewMenu: View {
     
@@ -59,26 +63,43 @@ struct ViewMenu: View {
                     
                     if let themeGroup = themeGroups.first {
                         Divider().padding()
-                        ViewTheme(themeGroup: themeGroup)
+                        ViewTheme(themeGroup: themeGroup).frame(height: 200)
                     }
                     Divider().padding()
-                    Button("123", action: {
+                    Button("添加主题", action: {
                         showSecondView = true
                     })
                 }
             }
         }
         .sheet(isPresented: $showSecondView){
-            ViewThemeInsert()
+            if let themeGroup = themeGroups.first {
+                ViewThemeInsert(themeGroup: themeGroup, input_text: "", showSecondView: $showSecondView)
+            }
         }
     }
 }
 
 struct ViewThemeInsert: View {
     
+    @ObservedRealmObject var themeGroup: ThemeGroup
+    @State var input_text : String
+    @Binding var showSecondView: Bool
     var body: some View {
         VStack {
-            Text("test")
+            Button(action: {
+                
+                if(!input_text.isEmpty){
+                    let theme = Theme()
+                    theme.name = input_text
+                    $themeGroup.themes.append(theme)
+                    self.showSecondView = false
+                }
+            }) { Text("添加").padding(10) }
+            
+            TextField("请输入主题", text: $input_text)
+                .textFieldStyle(.roundedBorder)
+                .padding()
         }
     }
 }
