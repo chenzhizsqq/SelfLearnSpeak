@@ -12,6 +12,8 @@ struct ViewMenu: View {
     
     //对应环境变量
     @EnvironmentObject var envModel: EnvironmentModel
+    
+    //各种主题的数据
     @ObservedResults(ThemeGroup.self) var themeGroups
     
     init() {
@@ -27,6 +29,9 @@ struct ViewMenu: View {
         Realm.Configuration.defaultConfiguration = config
         
     }
+    
+    ///是否显示第二个页面
+    @State private var showSecondView = false
     
     var body: some View {
         
@@ -54,10 +59,26 @@ struct ViewMenu: View {
                     
                     if let themeGroup = themeGroups.first {
                         Divider().padding()
-                        ThemeView(themeGroup: themeGroup)
+                        ViewTheme(themeGroup: themeGroup)
                     }
+                    Divider().padding()
+                    Button("123", action: {
+                        showSecondView = true
+                    })
                 }
             }
+        }
+        .sheet(isPresented: $showSecondView){
+            ViewThemeInsert()
+        }
+    }
+}
+
+struct ViewThemeInsert: View {
+    
+    var body: some View {
+        VStack {
+            Text("test")
         }
     }
 }
@@ -68,21 +89,3 @@ struct ViewMenu_Previews: PreviewProvider {
     }
 }
 
-struct ThemeView: View {
-    @ObservedRealmObject var themeGroup: ThemeGroup
-    
-    var body: some View {
-        NavigationView {
-            VStack {
-                
-                // The list shows the items in the realm.
-                List {
-                    ForEach(themeGroup.themes) { theme in
-                        ThemeRow(theme: theme)
-                    }.onDelete(perform: $themeGroup.themes.remove)
-                        .onMove(perform: $themeGroup.themes.move)
-                }
-            }
-        }
-    }
-}
