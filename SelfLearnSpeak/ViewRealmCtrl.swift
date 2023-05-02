@@ -25,7 +25,6 @@ struct ViewRealmCtrl: View {
 
     }
     
-    @ObservedResults(TableGroup.self) var tableGroupsData
     @ObservedResults(ItemGroup.self) var itemGroupData
     @ObservedResults(Item.self) var itemData
     
@@ -67,8 +66,6 @@ struct ViewRealmCtrl: View {
                             sheetText = observedResultsToString(itemData)
                         case "ItemGroup":
                             sheetText = observedResultsToString(itemGroupData)
-                        case "TableGroups" :
-                            sheetText = observedResultsToString(tableGroupsData)
                         default:
                             sheetText = ""
                         }
@@ -97,9 +94,6 @@ struct ViewRealmCtrl: View {
                     
                     print("itemGroupData")
                     print(itemGroupData)
-                    
-                    print("tableGroupsData")
-                    print(tableGroupsData)
                 }.padding()
                 
                 
