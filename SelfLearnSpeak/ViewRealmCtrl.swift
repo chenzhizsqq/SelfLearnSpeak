@@ -100,8 +100,8 @@ struct ViewRealmCtrl: View {
                 Button("Delete All Tables") {
                     showAllDeleteAlert.toggle()
                 }.padding()
-                Button("Delete Table") {
-                    deleteTable(tableType: ItemGroup.self)
+                Button("自我紹介的默认数据") {
+                    viewModel.defaultTables()
                 }.padding()
             }
             
@@ -153,10 +153,20 @@ class ViewModel: ObservableObject {
     var tablesDescription: [String] {
         return realm.schema.objectSchema.map { $0.description }
     }
-
+    
     func deleteAllTables() {
         try! realm.write {
             realm.deleteAll()
+        }
+    }
+    
+    func defaultTables() {
+        try! realm.write {
+            realm.deleteAll()
+            
+            let itemGroup = ItemGroup(value: ["ownerId": "previewRealm"])
+            itemGroup.items.append(objectsIn: Item.IntroduceMyselfArray)
+            realm.add(itemGroup)
         }
     }
 }
