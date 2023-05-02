@@ -12,15 +12,15 @@ struct ViewMenu: View {
     
     //对应环境变量
     @EnvironmentObject var envModel: EnvironmentModel
+    @ObservedResults(ThemeGroup.self) var themeGroups
     
     init() {
-        RealmClassUpdate(className: "previewRealm",CurrentSchemaVersion: 7 )
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        RealmClassUpdate(CurrentSchemaVersion: 7 )
+        debugPrint(Realm.Configuration.defaultConfiguration.fileURL!)
     }
     
     ///如果要追加数据库的结构时
-    func RealmClassUpdate(className: String , CurrentSchemaVersion:Int){
-        
+    func RealmClassUpdate( CurrentSchemaVersion:Int){
         let config = Realm.Configuration(schemaVersion: UInt64(CurrentSchemaVersion), migrationBlock: { migration, oldSchemaVersion in
         })
         
@@ -52,6 +52,10 @@ struct ViewMenu: View {
                         Text("ViewTestMain")
                     }
                     
+                    if let themeGroup = themeGroups.first {
+                        Divider().padding()
+                        ThemeView(themeGroup: themeGroup)
+                    }
                 }
             }
         }
@@ -61,5 +65,24 @@ struct ViewMenu: View {
 struct ViewMenu_Previews: PreviewProvider {
     static var previews: some View {
         ViewMenu()
+    }
+}
+
+struct ThemeView: View {
+    @ObservedRealmObject var themeGroup: ThemeGroup
+    
+    var body: some View {
+        NavigationView {
+            VStack {
+                
+                // The list shows the items in the realm.
+                List {
+                    ForEach(themeGroup.themes) { theme in
+                        ThemeRow(theme: theme)
+                    }.onDelete(perform: $themeGroup.themes.remove)
+                        .onMove(perform: $themeGroup.themes.move)
+                }
+            }
+        }
     }
 }

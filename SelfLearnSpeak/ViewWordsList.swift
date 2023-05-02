@@ -61,6 +61,21 @@ final class ThemeGroup: Object, ObjectKeyIdentifiable {
     @Persisted var themes = RealmSwift.List<Theme>()
 }
 
+/// Represents an Item in a list.
+struct ThemeRow: View {
+    @ObservedRealmObject var theme: Theme
+    
+    var body: some View {
+        // You can click an item in the list to navigate to an edit details screen.
+        VStack{
+            HStack{
+                
+                Text(theme.name)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+    }
+}
 extension Item {
     static let item1 = Item(value: ["name": "fluffy coasters", "isFavorite": false, "ownerId": "previewRealm"])
     static let item2 = Item(value: ["name": "sudden cinder block", "isFavorite": true, "ownerId": "previewRealm"])
