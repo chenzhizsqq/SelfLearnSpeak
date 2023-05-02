@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3303DE9129F7B57C00CD2E89 /* ViewTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3303DE9029F7B57C00CD2E89 /* ViewTemplate.swift */; };
+		331F43832A00A06500E43DD2 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331F43822A00A06500E43DD2 /* AppEnvironment.swift */; };
 		331FFBF629FF687700B8AA4C /* ViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331FFBF529FF687700B8AA4C /* ViewTest.swift */; };
 		331FFBF829FF6D9100B8AA4C /* ViewTest2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331FFBF729FF6D9100B8AA4C /* ViewTest2.swift */; };
 		331FFBFA29FF6DA500B8AA4C /* ViewTestMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331FFBF929FF6DA500B8AA4C /* ViewTestMain.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		3303DE9029F7B57C00CD2E89 /* ViewTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTemplate.swift; sourceTree = "<group>"; };
+		331F43822A00A06500E43DD2 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		331FFBF529FF687700B8AA4C /* ViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTest.swift; sourceTree = "<group>"; };
 		331FFBF729FF6D9100B8AA4C /* ViewTest2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTest2.swift; sourceTree = "<group>"; };
 		331FFBF929FF6DA500B8AA4C /* ViewTestMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTestMain.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				33B0289229F29298003B55AD /* BaiduFanyiAPI.swift */,
 				3389B1A829EFB06C009EA217 /* Assets.xcassets */,
 				33B0288329F110FD003B55AD /* EnvironmentModel.swift */,
+				331F43822A00A06500E43DD2 /* AppEnvironment.swift */,
 				3389B1AA29EFB06C009EA217 /* Preview Content */,
 			);
 			path = SelfLearnSpeak;
@@ -208,6 +211,7 @@
 				33B0288629F115AA003B55AD /* ViewWordsListInsert.swift in Sources */,
 				331FFBFA29FF6DA500B8AA4C /* ViewTestMain.swift in Sources */,
 				3389B1BD29EFB88A009EA217 /* ViewWordsList.swift in Sources */,
+				331F43832A00A06500E43DD2 /* AppEnvironment.swift in Sources */,
 				33720F6229FA4D7B005CFF99 /* ViewRealmCtrl.swift in Sources */,
 				3303DE9129F7B57C00CD2E89 /* ViewTemplate.swift in Sources */,
 				3389B1A529EFB069009EA217 /* SelfLearnSpeakApp.swift in Sources */,
