@@ -204,7 +204,7 @@ struct ItemsView: View {
                         all_text.append(Item.name)
                         all_text.append("。")
                     }
-                    envModel.text2speech(all_text)
+                    envModel.text2speech(all_text, language: "ja-JP")
                     
                 }
                 // Action bar at bottom contains Add button.
@@ -237,7 +237,7 @@ struct ItemRow: View {
                     Image(systemName: "heart.fill")
                 }
                 Button(action: {
-                    envModel.text2speech(item.name)
+                    envModel.text2speech(item.name, language: "ja-JP")
                 }) { Image(systemName: "speaker.wave.3") }
                     .buttonStyle(CustomButtonStyle(padding: 5))
             }
