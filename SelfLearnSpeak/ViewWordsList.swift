@@ -109,6 +109,14 @@ struct ThemeRow: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
+        .onTapGesture {
+            showSecondItemRowView = true
+        }
+        .sheet(isPresented: $showSecondItemRowView, onDismiss: {
+            // 在这里添加操作
+        }, content: {
+            ViewThemeEdit(theme: theme, input_text: $theme.name, showSecondView: $showSecondItemRowView)
+        })
     }
 }
 extension Item {
@@ -314,7 +322,6 @@ struct ItemRow: View {
         }
         .sheet(isPresented: $showSecondItemRowView, onDismiss: {
             // 在这里添加操作
-            print("Sheet onDismiss")
         }, content: {
             ItemDetailsView(isFavorite:$item.isFavorite,input_text:$item.name,description_text:$item.itemDescription, showSecondView: $showSecondItemRowView)
         })

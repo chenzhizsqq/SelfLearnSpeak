@@ -104,6 +104,26 @@ struct ViewThemeInsert: View {
     }
 }
 
+struct ViewThemeEdit: View {
+    @ObservedRealmObject var theme: Theme
+    @Binding var input_text : String
+    @Binding var showSecondView: Bool
+    var body: some View {
+        VStack {
+            Button(action: {
+                
+                if(!input_text.isEmpty){
+                    self.showSecondView = false
+                }
+            }) { Text("修改").padding(10) }
+            
+            TextField("请输入主题", text: $input_text)
+                .textFieldStyle(.roundedBorder)
+                .padding()
+        }
+    }
+}
+
 struct ViewMenu_Previews: PreviewProvider {
     static var previews: some View {
         ViewMenu()
