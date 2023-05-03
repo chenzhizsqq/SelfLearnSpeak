@@ -38,7 +38,7 @@ struct ViewTemplate: View {
                 .padding(.horizontal)
                 
                 Button(action: {
-                    envModel.text2speech(description_text,language: AppEnvironment.dataArray["ja-JP"]?.VoiceLanguag)
+                    envModel.text2speech(input_text,language: AppEnvironment.dataArray["ja-JP"]?.VoiceLanguag)
                 }) { Image(systemName: "speaker.wave.3") }
                     .buttonStyle(CustomButtonStyle(padding: 5))
             }.frame(height: 50)
