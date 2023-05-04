@@ -23,6 +23,15 @@
 		3389B1BD29EFB88A009EA217 /* ViewWordsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3389B1BC29EFB88A009EA217 /* ViewWordsList.swift */; };
 		33A47EFC2A035A4500D3B240 /* ViewThemeEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A47EFB2A035A4500D3B240 /* ViewThemeEdit.swift */; };
 		33A47EFF2A035B0E00D3B240 /* ViewThemeInsert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A47EFE2A035B0E00D3B240 /* ViewThemeInsert.swift */; };
+		33A47F022A035EA800D3B240 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A47F012A035EA800D3B240 /* Item.swift */; };
+		33A47F042A035EEF00D3B240 /* ItemGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A47F032A035EEF00D3B240 /* ItemGroup.swift */; };
+		33A47F072A036EA200D3B240 /* ExString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A47F062A036EA200D3B240 /* ExString.swift */; };
+		33A47F092A03B6BB00D3B240 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A47F082A03B6BB00D3B240 /* Theme.swift */; };
+		33A47F0B2A03B6FA00D3B240 /* ThemeGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A47F0A2A03B6FA00D3B240 /* ThemeGroup.swift */; };
+		33A47F0D2A03B77700D3B240 /* ThemeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A47F0C2A03B77700D3B240 /* ThemeRow.swift */; };
+		33A47F0F2A03B7B500D3B240 /* ItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A47F0E2A03B7B500D3B240 /* ItemsView.swift */; };
+		33A47F112A03B7F700D3B240 /* ItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A47F102A03B7F700D3B240 /* ItemRow.swift */; };
+		33A47F142A03B88900D3B240 /* CustomButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A47F132A03B88900D3B240 /* CustomButtonStyle.swift */; };
 		33B0288429F110FD003B55AD /* EnvironmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0288329F110FD003B55AD /* EnvironmentModel.swift */; };
 		33B0288629F115AA003B55AD /* ViewWordsListInsert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0288529F115AA003B55AD /* ViewWordsListInsert.swift */; };
 		33B0288929F1294F003B55AD /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 33B0288829F1294F003B55AD /* Alamofire */; };
@@ -49,6 +58,15 @@
 		3389B1BC29EFB88A009EA217 /* ViewWordsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewWordsList.swift; sourceTree = "<group>"; };
 		33A47EFB2A035A4500D3B240 /* ViewThemeEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewThemeEdit.swift; sourceTree = "<group>"; };
 		33A47EFE2A035B0E00D3B240 /* ViewThemeInsert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewThemeInsert.swift; sourceTree = "<group>"; };
+		33A47F012A035EA800D3B240 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		33A47F032A035EEF00D3B240 /* ItemGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemGroup.swift; sourceTree = "<group>"; };
+		33A47F062A036EA200D3B240 /* ExString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExString.swift; sourceTree = "<group>"; };
+		33A47F082A03B6BB00D3B240 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		33A47F0A2A03B6FA00D3B240 /* ThemeGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeGroup.swift; sourceTree = "<group>"; };
+		33A47F0C2A03B77700D3B240 /* ThemeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeRow.swift; sourceTree = "<group>"; };
+		33A47F0E2A03B7B500D3B240 /* ItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsView.swift; sourceTree = "<group>"; };
+		33A47F102A03B7F700D3B240 /* ItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRow.swift; sourceTree = "<group>"; };
+		33A47F132A03B88900D3B240 /* CustomButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonStyle.swift; sourceTree = "<group>"; };
 		33B0288329F110FD003B55AD /* EnvironmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentModel.swift; sourceTree = "<group>"; };
 		33B0288529F115AA003B55AD /* ViewWordsListInsert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewWordsListInsert.swift; sourceTree = "<group>"; };
 		33B0289229F29298003B55AD /* BaiduFanyiAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaiduFanyiAPI.swift; sourceTree = "<group>"; };
@@ -92,6 +110,7 @@
 		3389B1A329EFB069009EA217 /* SelfLearnSpeak */ = {
 			isa = PBXGroup;
 			children = (
+				3389B1AA29EFB06C009EA217 /* Preview Content */,
 				3389B1A629EFB069009EA217 /* ContentView.swift */,
 				3389B1A429EFB069009EA217 /* SelfLearnSpeakApp.swift */,
 				33544ACD29F91A490038109E /* ViewMenu.swift */,
@@ -99,9 +118,10 @@
 				33A47EF92A0359B700D3B240 /* Words */,
 				33A47EFA2A035A1300D3B240 /* Theme */,
 				33A47F002A035D5200D3B240 /* RealmCtrl */,
+				33A47F052A036E6C00D3B240 /* Extension */,
 				33A47EFD2A035AA100D3B240 /* API */,
 				33A47EF82A0358E800D3B240 /* Environment */,
-				3389B1AA29EFB06C009EA217 /* Preview Content */,
+				33A47F122A03B86D00D3B240 /* Custom */,
 				33A47EF72A0358C100D3B240 /* Test */,
 			);
 			path = SelfLearnSpeak;
@@ -141,6 +161,8 @@
 				33B0289429F29537003B55AD /* ItemDetailsView.swift */,
 				33B0288529F115AA003B55AD /* ViewWordsListInsert.swift */,
 				3389B1BC29EFB88A009EA217 /* ViewWordsList.swift */,
+				33A47F0E2A03B7B500D3B240 /* ItemsView.swift */,
+				33A47F102A03B7F700D3B240 /* ItemRow.swift */,
 			);
 			path = Words;
 			sourceTree = "<group>";
@@ -151,6 +173,7 @@
 				33B22BEB2A00D72300D6D7D0 /* ViewTheme.swift */,
 				33A47EFB2A035A4500D3B240 /* ViewThemeEdit.swift */,
 				33A47EFE2A035B0E00D3B240 /* ViewThemeInsert.swift */,
+				33A47F0C2A03B77700D3B240 /* ThemeRow.swift */,
 			);
 			path = Theme;
 			sourceTree = "<group>";
@@ -167,8 +190,28 @@
 			isa = PBXGroup;
 			children = (
 				33720F6129FA4D7B005CFF99 /* ViewRealmCtrl.swift */,
+				33A47F012A035EA800D3B240 /* Item.swift */,
+				33A47F032A035EEF00D3B240 /* ItemGroup.swift */,
+				33A47F082A03B6BB00D3B240 /* Theme.swift */,
+				33A47F0A2A03B6FA00D3B240 /* ThemeGroup.swift */,
 			);
 			path = RealmCtrl;
+			sourceTree = "<group>";
+		};
+		33A47F052A036E6C00D3B240 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				33A47F062A036EA200D3B240 /* ExString.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		33A47F122A03B86D00D3B240 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				33A47F132A03B88900D3B240 /* CustomButtonStyle.swift */,
+			);
+			path = Custom;
 			sourceTree = "<group>";
 		};
 		33B0288729F1294F003B55AD /* Frameworks */ = {
@@ -263,19 +306,28 @@
 			files = (
 				33B0289529F29537003B55AD /* ItemDetailsView.swift in Sources */,
 				33544ACE29F91A490038109E /* ViewMenu.swift in Sources */,
+				33A47F142A03B88900D3B240 /* CustomButtonStyle.swift in Sources */,
 				33A47EFC2A035A4500D3B240 /* ViewThemeEdit.swift in Sources */,
 				3389B1A729EFB069009EA217 /* ContentView.swift in Sources */,
 				331FFBF829FF6D9100B8AA4C /* ViewTest2.swift in Sources */,
 				33B0288629F115AA003B55AD /* ViewWordsListInsert.swift in Sources */,
+				33A47F0D2A03B77700D3B240 /* ThemeRow.swift in Sources */,
+				33A47F0F2A03B7B500D3B240 /* ItemsView.swift in Sources */,
+				33A47F092A03B6BB00D3B240 /* Theme.swift in Sources */,
 				33B22BEC2A00D72300D6D7D0 /* ViewTheme.swift in Sources */,
 				331FFBFA29FF6DA500B8AA4C /* ViewTestMain.swift in Sources */,
 				3389B1BD29EFB88A009EA217 /* ViewWordsList.swift in Sources */,
+				33A47F072A036EA200D3B240 /* ExString.swift in Sources */,
 				331F43832A00A06500E43DD2 /* AppEnvironment.swift in Sources */,
+				33A47F042A035EEF00D3B240 /* ItemGroup.swift in Sources */,
+				33A47F022A035EA800D3B240 /* Item.swift in Sources */,
 				33A47EFF2A035B0E00D3B240 /* ViewThemeInsert.swift in Sources */,
 				33720F6229FA4D7B005CFF99 /* ViewRealmCtrl.swift in Sources */,
 				3303DE9129F7B57C00CD2E89 /* ViewTemplate.swift in Sources */,
 				3389B1A529EFB069009EA217 /* SelfLearnSpeakApp.swift in Sources */,
 				33B0289329F29298003B55AD /* BaiduFanyiAPI.swift in Sources */,
+				33A47F0B2A03B6FA00D3B240 /* ThemeGroup.swift in Sources */,
+				33A47F112A03B7F700D3B240 /* ItemRow.swift in Sources */,
 				33B0288429F110FD003B55AD /* EnvironmentModel.swift in Sources */,
 				331FFBF629FF687700B8AA4C /* ViewTest.swift in Sources */,
 			);
