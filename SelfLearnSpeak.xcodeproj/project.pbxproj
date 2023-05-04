@@ -21,6 +21,8 @@
 		3389B1B429EFB287009EA217 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3389B1B329EFB287009EA217 /* Realm */; };
 		3389B1B629EFB287009EA217 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3389B1B529EFB287009EA217 /* RealmSwift */; };
 		3389B1BD29EFB88A009EA217 /* ViewWordsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3389B1BC29EFB88A009EA217 /* ViewWordsList.swift */; };
+		33A47EFC2A035A4500D3B240 /* ViewThemeEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A47EFB2A035A4500D3B240 /* ViewThemeEdit.swift */; };
+		33A47EFF2A035B0E00D3B240 /* ViewThemeInsert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A47EFE2A035B0E00D3B240 /* ViewThemeInsert.swift */; };
 		33B0288429F110FD003B55AD /* EnvironmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0288329F110FD003B55AD /* EnvironmentModel.swift */; };
 		33B0288629F115AA003B55AD /* ViewWordsListInsert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B0288529F115AA003B55AD /* ViewWordsListInsert.swift */; };
 		33B0288929F1294F003B55AD /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 33B0288829F1294F003B55AD /* Alamofire */; };
@@ -45,6 +47,8 @@
 		3389B1A829EFB06C009EA217 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3389B1AB29EFB06C009EA217 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3389B1BC29EFB88A009EA217 /* ViewWordsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewWordsList.swift; sourceTree = "<group>"; };
+		33A47EFB2A035A4500D3B240 /* ViewThemeEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewThemeEdit.swift; sourceTree = "<group>"; };
+		33A47EFE2A035B0E00D3B240 /* ViewThemeInsert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewThemeInsert.swift; sourceTree = "<group>"; };
 		33B0288329F110FD003B55AD /* EnvironmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentModel.swift; sourceTree = "<group>"; };
 		33B0288529F115AA003B55AD /* ViewWordsListInsert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewWordsListInsert.swift; sourceTree = "<group>"; };
 		33B0289229F29298003B55AD /* BaiduFanyiAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaiduFanyiAPI.swift; sourceTree = "<group>"; };
@@ -88,23 +92,17 @@
 		3389B1A329EFB069009EA217 /* SelfLearnSpeak */ = {
 			isa = PBXGroup;
 			children = (
-				3389B1A429EFB069009EA217 /* SelfLearnSpeakApp.swift */,
-				3389B1BC29EFB88A009EA217 /* ViewWordsList.swift */,
-				33720F6129FA4D7B005CFF99 /* ViewRealmCtrl.swift */,
-				33544ACD29F91A490038109E /* ViewMenu.swift */,
-				33B22BEB2A00D72300D6D7D0 /* ViewTheme.swift */,
-				331FFBF529FF687700B8AA4C /* ViewTest.swift */,
-				331FFBF729FF6D9100B8AA4C /* ViewTest2.swift */,
-				331FFBF929FF6DA500B8AA4C /* ViewTestMain.swift */,
-				33B0288529F115AA003B55AD /* ViewWordsListInsert.swift */,
-				33B0289429F29537003B55AD /* ItemDetailsView.swift */,
-				3303DE9029F7B57C00CD2E89 /* ViewTemplate.swift */,
 				3389B1A629EFB069009EA217 /* ContentView.swift */,
-				33B0289229F29298003B55AD /* BaiduFanyiAPI.swift */,
+				3389B1A429EFB069009EA217 /* SelfLearnSpeakApp.swift */,
+				33544ACD29F91A490038109E /* ViewMenu.swift */,
 				3389B1A829EFB06C009EA217 /* Assets.xcassets */,
-				33B0288329F110FD003B55AD /* EnvironmentModel.swift */,
-				331F43822A00A06500E43DD2 /* AppEnvironment.swift */,
+				33A47EF92A0359B700D3B240 /* Words */,
+				33A47EFA2A035A1300D3B240 /* Theme */,
+				33A47F002A035D5200D3B240 /* RealmCtrl */,
+				33A47EFD2A035AA100D3B240 /* API */,
+				33A47EF82A0358E800D3B240 /* Environment */,
 				3389B1AA29EFB06C009EA217 /* Preview Content */,
+				33A47EF72A0358C100D3B240 /* Test */,
 			);
 			path = SelfLearnSpeak;
 			sourceTree = "<group>";
@@ -115,6 +113,62 @@
 				3389B1AB29EFB06C009EA217 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		33A47EF72A0358C100D3B240 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				331FFBF529FF687700B8AA4C /* ViewTest.swift */,
+				331FFBF729FF6D9100B8AA4C /* ViewTest2.swift */,
+				331FFBF929FF6DA500B8AA4C /* ViewTestMain.swift */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		33A47EF82A0358E800D3B240 /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				33B0288329F110FD003B55AD /* EnvironmentModel.swift */,
+				331F43822A00A06500E43DD2 /* AppEnvironment.swift */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
+		33A47EF92A0359B700D3B240 /* Words */ = {
+			isa = PBXGroup;
+			children = (
+				3303DE9029F7B57C00CD2E89 /* ViewTemplate.swift */,
+				33B0289429F29537003B55AD /* ItemDetailsView.swift */,
+				33B0288529F115AA003B55AD /* ViewWordsListInsert.swift */,
+				3389B1BC29EFB88A009EA217 /* ViewWordsList.swift */,
+			);
+			path = Words;
+			sourceTree = "<group>";
+		};
+		33A47EFA2A035A1300D3B240 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				33B22BEB2A00D72300D6D7D0 /* ViewTheme.swift */,
+				33A47EFB2A035A4500D3B240 /* ViewThemeEdit.swift */,
+				33A47EFE2A035B0E00D3B240 /* ViewThemeInsert.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		33A47EFD2A035AA100D3B240 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				33B0289229F29298003B55AD /* BaiduFanyiAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		33A47F002A035D5200D3B240 /* RealmCtrl */ = {
+			isa = PBXGroup;
+			children = (
+				33720F6129FA4D7B005CFF99 /* ViewRealmCtrl.swift */,
+			);
+			path = RealmCtrl;
 			sourceTree = "<group>";
 		};
 		33B0288729F1294F003B55AD /* Frameworks */ = {
@@ -209,6 +263,7 @@
 			files = (
 				33B0289529F29537003B55AD /* ItemDetailsView.swift in Sources */,
 				33544ACE29F91A490038109E /* ViewMenu.swift in Sources */,
+				33A47EFC2A035A4500D3B240 /* ViewThemeEdit.swift in Sources */,
 				3389B1A729EFB069009EA217 /* ContentView.swift in Sources */,
 				331FFBF829FF6D9100B8AA4C /* ViewTest2.swift in Sources */,
 				33B0288629F115AA003B55AD /* ViewWordsListInsert.swift in Sources */,
@@ -216,6 +271,7 @@
 				331FFBFA29FF6DA500B8AA4C /* ViewTestMain.swift in Sources */,
 				3389B1BD29EFB88A009EA217 /* ViewWordsList.swift in Sources */,
 				331F43832A00A06500E43DD2 /* AppEnvironment.swift in Sources */,
+				33A47EFF2A035B0E00D3B240 /* ViewThemeInsert.swift in Sources */,
 				33720F6229FA4D7B005CFF99 /* ViewRealmCtrl.swift in Sources */,
 				3303DE9129F7B57C00CD2E89 /* ViewTemplate.swift in Sources */,
 				3389B1A529EFB069009EA217 /* SelfLearnSpeakApp.swift in Sources */,
