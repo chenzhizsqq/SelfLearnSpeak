@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3303DE9129F7B57C00CD2E89 /* ViewTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3303DE9029F7B57C00CD2E89 /* ViewTemplate.swift */; };
+		331355A82A04994A0052743F /* RecordAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331355A72A04994A0052743F /* RecordAPI.swift */; };
 		331F43832A00A06500E43DD2 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331F43822A00A06500E43DD2 /* AppEnvironment.swift */; };
 		331FFBF629FF687700B8AA4C /* ViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331FFBF529FF687700B8AA4C /* ViewTest.swift */; };
 		331FFBF829FF6D9100B8AA4C /* ViewTest2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331FFBF729FF6D9100B8AA4C /* ViewTest2.swift */; };
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		3303DE9029F7B57C00CD2E89 /* ViewTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTemplate.swift; sourceTree = "<group>"; };
+		331355A72A04994A0052743F /* RecordAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordAPI.swift; sourceTree = "<group>"; };
 		331F43822A00A06500E43DD2 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		331FFBF529FF687700B8AA4C /* ViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTest.swift; sourceTree = "<group>"; };
 		331FFBF729FF6D9100B8AA4C /* ViewTest2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTest2.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 		33A47F0E2A03B7B500D3B240 /* ItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsView.swift; sourceTree = "<group>"; };
 		33A47F102A03B7F700D3B240 /* ItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRow.swift; sourceTree = "<group>"; };
 		33A47F132A03B88900D3B240 /* CustomButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonStyle.swift; sourceTree = "<group>"; };
+		33A47F152A03BB1E00D3B240 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		33B0288329F110FD003B55AD /* EnvironmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentModel.swift; sourceTree = "<group>"; };
 		33B0288529F115AA003B55AD /* ViewWordsListInsert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewWordsListInsert.swift; sourceTree = "<group>"; };
 		33B0289229F29298003B55AD /* BaiduFanyiAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaiduFanyiAPI.swift; sourceTree = "<group>"; };
@@ -110,6 +113,7 @@
 		3389B1A329EFB069009EA217 /* SelfLearnSpeak */ = {
 			isa = PBXGroup;
 			children = (
+				33A47F152A03BB1E00D3B240 /* Info.plist */,
 				3389B1AA29EFB06C009EA217 /* Preview Content */,
 				3389B1A629EFB069009EA217 /* ContentView.swift */,
 				3389B1A429EFB069009EA217 /* SelfLearnSpeakApp.swift */,
@@ -182,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				33B0289229F29298003B55AD /* BaiduFanyiAPI.swift */,
+				331355A72A04994A0052743F /* RecordAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -316,6 +321,7 @@
 				33A47F092A03B6BB00D3B240 /* Theme.swift in Sources */,
 				33B22BEC2A00D72300D6D7D0 /* ViewTheme.swift in Sources */,
 				331FFBFA29FF6DA500B8AA4C /* ViewTestMain.swift in Sources */,
+				331355A82A04994A0052743F /* RecordAPI.swift in Sources */,
 				3389B1BD29EFB88A009EA217 /* ViewWordsList.swift in Sources */,
 				33A47F072A036EA200D3B240 /* ExString.swift in Sources */,
 				331F43832A00A06500E43DD2 /* AppEnvironment.swift in Sources */,
@@ -461,6 +467,8 @@
 				DEVELOPMENT_TEAM = V26H4FVB2P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SelfLearnSpeak/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -491,6 +499,8 @@
 				DEVELOPMENT_TEAM = V26H4FVB2P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SelfLearnSpeak/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

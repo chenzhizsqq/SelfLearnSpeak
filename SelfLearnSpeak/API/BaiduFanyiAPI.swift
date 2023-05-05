@@ -39,15 +39,15 @@ class BaiduFanyiAPI {
             switch response.result {
             case .success(let data):
                 debugPrint("!!! response.request success")
-                print(data.from)
-                print(data.to)
-                print(data.transResult)
+                debugPrint(data.from)
+                debugPrint(data.to)
+                debugPrint(data.transResult)
                 
                 if let src = data.transResult.first?.src as? String {
-                    print(src)
+                    debugPrint(src)
                 }
                 if let dst = data.transResult.first?.dst as? String {
-                    print(dst)
+                    debugPrint(dst)
                     if(type=="jp2zh"){
                         mvvm.zh = dst
                     }
@@ -82,7 +82,7 @@ extension String {
     /// - Returns: 加密字符串
     func DDMD5Encrypt(_ md5Type: MD5EncryptType = .lowercase32) -> String {
         guard self.count > 0 else {
-            print("⚠️⚠️⚠️md5加密无效的字符串⚠️⚠️⚠️")
+            debugPrint("⚠️⚠️⚠️md5加密无效的字符串⚠️⚠️⚠️")
             return ""
         }
         /// 1.把待加密的字符串转成char类型数据 因为MD5加密是C语言加密

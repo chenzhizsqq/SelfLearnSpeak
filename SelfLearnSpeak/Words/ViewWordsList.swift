@@ -17,14 +17,14 @@ struct ViewWordsList: View {
     
     init() {
         debugPrint("ViewWordsList !!!")
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        debugPrint(Realm.Configuration.defaultConfiguration.fileURL!)
         
-        print(itemGroups)
+        debugPrint(itemGroups)
         
         let fileManager = FileManager.default
         let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
         let realmURL = documentsDirectory.appendingPathComponent("default.realm")
-        print("Realm file path: \(realmURL.path)")
+        debugPrint("Realm file path: \(realmURL.path)")
     }
     var body: some View {
         if let itemGroup = itemGroups.first {

@@ -36,9 +36,9 @@ struct ViewRealmCtrl: View {
                     if let selectedTable = selectedTable {
                         let objectSchema = realm.schema.objectSchema.first(where: { $0.className == selectedTable })
                         let propertyList = objectSchema?.properties.map({ $0.name })
-                        print("\(String(describing: propertyList))")
+                        debugPrint("\(String(describing: propertyList))")
                         let combinedString = propertyList!.joined(separator: " , ")
-                        print(combinedString)
+                        debugPrint(combinedString)
                         
                         isPresentingSheet = true
                         sheetText = combinedString
@@ -52,7 +52,7 @@ struct ViewRealmCtrl: View {
                         let propertyList = objectSchema?.description.map({ $0.description })
                         
                         let combinedString = propertyList!.joined(separator: "")
-                        print(combinedString)
+                        debugPrint(combinedString)
                         isPresentingSheet = true
                         sheetText = combinedString
                         
@@ -84,16 +84,16 @@ struct ViewRealmCtrl: View {
                     //添加条件
                     let realm = try! Realm()
                     let people = realm.objects(Item.self).filter("isFavorite == true")
-                    print(people)
+                    debugPrint(people)
                     
-                    print("viewModel.realm.configuration.inMemoryIdentifier")
-                    print(String(describing: viewModel.realm.configuration.inMemoryIdentifier))
+                    debugPrint("viewModel.realm.configuration.inMemoryIdentifier")
+                    debugPrint(String(describing: viewModel.realm.configuration.inMemoryIdentifier))
                     
-                    print("itemData")
-                    print(itemData)
+                    debugPrint("itemData")
+                    debugPrint(itemData)
                     
-                    print("itemGroupData")
-                    print(itemGroupData)
+                    debugPrint("itemGroupData")
+                    debugPrint(itemGroupData)
                 }.padding()
                 
                 
@@ -130,7 +130,7 @@ struct ViewRealmCtrl: View {
                 realm.delete(tableToDelete)
             }
         } catch let error as NSError {
-            print("Error deleting table: \(error.localizedDescription)")
+            debugPrint("Error deleting table: \(error.localizedDescription)")
         }
     }
     
