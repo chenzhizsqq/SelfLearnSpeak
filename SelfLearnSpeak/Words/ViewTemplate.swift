@@ -17,7 +17,7 @@ struct ViewTemplate: View {
     @Binding var description_text: String
     @StateObject var transViewModel = TransViewModel()
     var body: some View {
-        VStack {
+        ScrollView {
             
             HStack{
                 HStack{
@@ -31,6 +31,7 @@ struct ViewTemplate: View {
                 Button("翻译") {
                     if(!input_text.isEmpty){
                         BaiduFanyiAPI.getfanyi(from: "jp" ,to: "zh", text: input_text, type: "jp2zh", mvvm: transViewModel)
+                        hideKeyboard()
                     }else{
                         debugPrint("!!! input_text.isEmpty")
                     }
@@ -59,6 +60,7 @@ struct ViewTemplate: View {
                 Button("翻译") {
                     if(!description_text.isEmpty){
                         BaiduFanyiAPI.getfanyi(from: "zh" ,to: "jp", text: description_text, type: "zh2jp", mvvm: transViewModel)
+                        hideKeyboard()
                     }else{
                         debugPrint("!!! description_text.isEmpty")
                     }
@@ -80,9 +82,9 @@ struct ViewTemplate: View {
                 .background(.cyan)
                 .padding()
         }
-        .onTapGesture {
-            hideKeyboard()
-        }
+//        .onTapGesture {
+//            hideKeyboard()
+//        }
         .onChange(of: transViewModel.jp) { newValue in
             // 这里可以响应myValue变化时的操作
             debugPrint("transViewModel.jp")
