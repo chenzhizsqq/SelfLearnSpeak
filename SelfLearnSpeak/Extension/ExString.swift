@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import SwiftUI
+import UIKit
 
 extension String {
 //    func toHiragana() -> String? {
@@ -15,4 +17,5 @@ extension String {
 //        CFStringTransform(input, nil, transform as CFString, false)
 //        return input as String
 //    }
+    
 }
