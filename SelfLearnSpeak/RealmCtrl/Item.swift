@@ -37,44 +37,22 @@ extension Item {
     
     //自我紹介的默认数据
     static let IntroduceMyselfArray = [
-        Item(value: ["name": "2007年に中国電子科学技術大学を卒業しました。",
-                     "itemDescription":"毕业于中国大学。　"]),
-        Item(value: ["name": "中国では、私は6年間IT開発をしました。",
-                     "itemDescription":""]),
-        Item(value: [
-            "name": "2013年から、日本に来て、IT開発をしました。"]
-            ),
-        Item(value: [
-            "name": "これまで、日本では9年間のIT開発経験があります。"]
-            ),
-        Item(value: [
-            "name": "今、私は北池袋に、住んでいます。"]
-            ),
-        Item(value: [
-            "name": "また、日本語能力検定は二級です。"]
-            ),
-        Item(value: [
-            "name": "日本語の読み書き，と一般会話，は大丈夫です。"]
-            ),
-        Item(value: [
-            "name": "だから、基本設計と詳細設計には、問題もありません。"]
-            ),
-        Item(value: [
-            "name": "私の開発能力について。"]
-            ),
-        Item(value: [
-            "name": "得意な開発能力はモバイルソフトウェア開発です。"]
-            ),
-        Item(value: [
-            "name": "モバイルソフトウェア開発経験のうち、JAVA三年、kotlin三年、swift二年、JS 一年。"]
-            ),
-        Item(value: [
-            "name": "ここ5年間、主に　モバイルソフトウェア開発のプロジェクトをしています。"]
-            ),
-        Item(value: [
-            "name": "今、私のモバイルのプロジェクトを紹介します。"]
-            ),
-        Item(value: ["name": "履歴書の１０番目のプロジェクト。主な内容はモバイル開発です。"]),
+        Item(value: ["name": "私の名前は　チンシ と 申します。"]),
+        Item(value: ["name": "よろしくお願いいたします。"]),
+        Item(value: ["name": "2007年に中国電子科学技術大学を卒業しました。"]),
+        Item(value: ["name": "中国では、6年間IT開発をしてきました。"]),
+        Item(value: ["name": "2013年から、IT開発のために来日。"]),
+        Item(value: ["name": "これまで、日本では 9年間 IT開発経験があります。"]),
+        Item(value: ["name": "今、私は北池袋に、住んでいます。"]),
+        Item(value: ["name": "また、日本語能力検定は二級です。"]),
+        Item(value: ["name": "日本語の読み書き，と一般会話，は大丈夫です。"]),
+        Item(value: ["name": "だから、基本設計と詳細設計も、問題ありません。"]),
+        Item(value: ["name": "私の開発能力について。"]),
+        Item(value: ["name": "得意な開発言語はJAVAです。"]),
+        Item(value: ["name": "開発経験では、JAVA 5年、kotlin 3年、swift 2年、JS 1年。"]),
+        //Item(value: ["name": "ここ5年間、主に　モバイルソフトウェア開発のプロジェクトをしています。"]),
+        Item(value: ["name": "今、私の得意なプロジェクトを紹介します。"]),
+        Item(value: ["name": "履歴書の１０番目のプロジェクト。主な内容は　開発です。"]),
         Item(value: ["name": "以上、私の自己紹介です。ありがとうございます。"]),
         ]
 }
