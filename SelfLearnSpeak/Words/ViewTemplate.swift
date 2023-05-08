@@ -57,6 +57,8 @@ struct ViewTemplate: View {
             
             HStack{
                 TextField("练习发音", text: $text)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .overlay(RoundedRectangle(cornerRadius: 5).stroke(.gray, lineWidth: 1))
                 Button("清除") {
                     text = ""
                 }

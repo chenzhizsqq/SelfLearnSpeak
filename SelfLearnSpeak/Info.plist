@@ -8,5 +8,11 @@
 	<string>Speech Recognition Usage Description</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Microphone Usage Description</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>zh_CN</string>
+		<string>ja</string>
+	</array>
 </dict>
 </plist>
