@@ -7,7 +7,7 @@
 
 import SwiftUI
 import RealmSwift
-import AVFoundation
+import Speech
 
 
 /// Represents a screen where you can edit the item's name.

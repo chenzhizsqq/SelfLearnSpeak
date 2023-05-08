@@ -7,7 +7,7 @@
 
 import SwiftUI
 import RealmSwift
-import AVFoundation
+import Speech
 import Alamofire
 import CryptoSwift
 

@@ -8,7 +8,7 @@
 import Foundation
 
 import RealmSwift
-import AVFoundation
+import Speech
 
 /// Represents a collection of items.
 final class ThemeGroup: Object, ObjectKeyIdentifiable {

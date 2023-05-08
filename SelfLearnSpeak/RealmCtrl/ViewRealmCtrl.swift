@@ -82,7 +82,6 @@ struct ViewRealmCtrl: View {
             Group{
                 Button("log") {
                     //添加条件
-                    let realm = try! Realm()
                     let people = realm.objects(Item.self).filter("isFavorite == true")
                     debugPrint(people)
                     

@@ -7,7 +7,7 @@
 
 import SwiftUI
 import RealmSwift
-import AVFoundation
+import Speech
 
 struct ViewTemplate: View {
     @EnvironmentObject var envModel: EnvironmentModel
@@ -16,6 +16,8 @@ struct ViewTemplate: View {
     @Binding var input_text : String
     @Binding var description_text: String
     @StateObject var transViewModel = TransViewModel()
+    
+    @State var text: String = ""
     var body: some View {
         ScrollView {
             
@@ -54,6 +56,13 @@ struct ViewTemplate: View {
                 .padding()
             
             HStack{
+                TextField("练习发音", text: $text)
+                Button("清除") {
+                    text = ""
+                }
+            }
+            
+            HStack{
                 Text("中文")
                     .textFieldStyle(DefaultTextFieldStyle())
                     .padding(.horizontal)
@@ -81,7 +90,7 @@ struct ViewTemplate: View {
                 .border(.gray)
                 .background(.cyan)
                 .padding()
-        }
+        }.padding(10)
 //        .onTapGesture {
 //            hideKeyboard()
 //        }

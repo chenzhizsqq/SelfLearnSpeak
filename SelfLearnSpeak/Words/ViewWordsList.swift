@@ -7,7 +7,7 @@
 
 import SwiftUI
 import RealmSwift
-import AVFoundation
+import Speech
 
 
 /// The main content view if not using Sync.
