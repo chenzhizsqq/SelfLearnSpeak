@@ -51,10 +51,12 @@ struct ViewMenu: View {
                         Text("数据库查询")
                     }
                     
-                    Divider().padding()
-                    NavigationLink(destination:
-                                    ViewTestMain()) {
-                        Text("ViewTestMain")
+                    if let themeGroup = themeGroups.first {
+                        Divider().padding()
+                        NavigationLink(destination:
+                                        ViewTestMain(themeGroup: themeGroup)) {
+                            Text("ViewTestMain")
+                        }
                     }
                     
                     if let themeGroup = themeGroups.first {

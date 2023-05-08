@@ -8,6 +8,7 @@
 import SwiftUI
 import Speech
 
+import RealmSwift
 //struct ViewTest: View {
 //    let synthesizer = AVSpeechSynthesizer()
 //    @Binding var inputText: String
@@ -37,21 +38,42 @@ struct ViewTest: View {
     
     @State var text = ""
     @FocusState var focus:Bool
-
+    
+    @State private var selectedOptionIndex = 0
+    
+    @ObservedRealmObject var themeGroup: ThemeGroup
+    var themeGroupOptions: [String] {
+        themeGroup.themes.map{ $0.name }
+    }
+    
     var body: some View {
-        Form {
-            TextEditor(text: self.$text)
-                .focused(self.$focus)
-                .toolbar{
-                    ToolbarItem(placement: .keyboard){
-                        HStack{
-                            Spacer()
-                            Button("Close"){
-                                self.focus = false
+        VStack {
+            
+            Form {
+                TextEditor(text: self.$text)
+                    .focused(self.$focus)
+                    .toolbar{
+                        ToolbarItem(placement: .keyboard){
+                            HStack{
+                                Spacer()
+                                Button("Close"){
+                                    self.focus = false
+                                }
                             }
                         }
                     }
+            }
+            
+            Picker("Options", selection: $selectedOptionIndex) {
+                ForEach(0..<themeGroupOptions.count) { index in
+                    Text(themeGroupOptions[index]).tag(index)
                 }
+            }
+            Text("Selected option: \(themeGroupOptions[selectedOptionIndex])")
+        }
+        .onChange(of: selectedOptionIndex) { index in
+            print("!!!")
+            print(themeGroupOptions[index])
         }
     }
 }

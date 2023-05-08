@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct ViewTestMain: View {
+    @ObservedRealmObject var themeGroup: ThemeGroup
+    
     var body: some View {
         VStack{
             Text("Speech")
-            ViewTest()
+            ViewTest(themeGroup: themeGroup)
             
                 Text("AVFoundation")
             ViewTest2()
@@ -19,8 +22,8 @@ struct ViewTestMain: View {
     }
 }
 
-struct ViewTestMain_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewTestMain()
-    }
-}
+//struct ViewTestMain_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ViewTestMain()
+//    }
+//}
