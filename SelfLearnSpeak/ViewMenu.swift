@@ -42,7 +42,11 @@ struct ViewMenu: View {
                     Divider().padding()
                     NavigationLink(destination:
                                     ViewWordsList()) {
-                        Text("ViewWordsList")
+                        Text("全部")
+                    }
+                    
+                    if let themeGroup = themeGroups.first {
+                        ViewTheme(themeGroup: themeGroup).frame(height: 400)
                     }
                     
                     Divider().padding()
@@ -57,11 +61,6 @@ struct ViewMenu: View {
                                         ViewTestMain(themeGroup: themeGroup)) {
                             Text("ViewTestMain")
                         }
-                    }
-                    
-                    if let themeGroup = themeGroups.first {
-                        Divider().padding()
-                        ViewTheme(themeGroup: themeGroup).frame(height: 200)
                     }
                     Divider().padding()
                     Button("添加主题", action: {

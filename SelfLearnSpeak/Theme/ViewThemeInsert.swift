@@ -14,11 +14,18 @@ struct ViewThemeInsert: View {
     @ObservedRealmObject var themeGroup: ThemeGroup
     @State var input_text : String
     @Binding var showSecondView: Bool
+    @State private var showAlert = false
     var body: some View {
         VStack {
             Button(action: {
+                let realm = try! Realm()
+                let input = realm.objects(Theme.self).filter("name == %@", input_text).first
                 
-                if(!input_text.isEmpty){
+                if let input = input {
+                    print("\(input.name) is \(input.isFavorite) isFavorite.")
+                    showAlert = true
+                } else {
+                    print("data \(input) not found.")
                     let theme = Theme()
                     theme.name = input_text
                     $themeGroup.themes.append(theme)
@@ -29,6 +36,9 @@ struct ViewThemeInsert: View {
             TextField("请输入主题", text: $input_text)
                 .textFieldStyle(.roundedBorder)
                 .padding()
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("提示"), message: Text("数据中已经有了"), dismissButton: .default(Text("OK")))
         }
     }
 }
