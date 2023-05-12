@@ -29,96 +29,99 @@ struct ViewRealmCtrl: View {
     @ObservedResults(Item.self) var itemData
     
     var body: some View {
-        VStack {
-            Group{
-                Divider().padding()
-                Button("properties 结构 \n选择后，点击查看") {
-                    if let selectedTable = selectedTable {
-                        let objectSchema = realm.schema.objectSchema.first(where: { $0.className == selectedTable })
-                        let propertyList = objectSchema?.properties.map({ $0.name })
-                        debugPrint("\(String(describing: propertyList))")
-                        let combinedString = propertyList!.joined(separator: " , ")
-                        debugPrint(combinedString)
-                        
-                        isPresentingSheet = true
-                        sheetText = combinedString
-                        
-                    }
-                }
-                Divider().padding()
-                Button("description 属性 \n选择后，点击查看") {
-                    if let selectedTable = selectedTable {
-                        let objectSchema = realm.schema.objectSchema.first(where: { $0.className == selectedTable })
-                        let propertyList = objectSchema?.description.map({ $0.description })
-                        
-                        let combinedString = propertyList!.joined(separator: "")
-                        debugPrint(combinedString)
-                        isPresentingSheet = true
-                        sheetText = combinedString
-                        
-                    }
-                }
-                Divider().padding()
-                Button("table的数据 \n选择后，点击查看") {
-                    if let selectedTable = selectedTable {
-                        switch selectedTable {
-                        case "Item":
-                            sheetText = observedResultsToString(itemData)
-                        case "ItemGroup":
-                            sheetText = observedResultsToString(itemGroupData)
-                        default:
-                            sheetText = ""
+        
+        ScrollView{
+            VStack {
+                Group{
+                    Divider().padding()
+                    Button("properties 结构 \n选择后，点击查看") {
+                        if let selectedTable = selectedTable {
+                            let objectSchema = realm.schema.objectSchema.first(where: { $0.className == selectedTable })
+                            let propertyList = objectSchema?.properties.map({ $0.name })
+                            debugPrint("\(String(describing: propertyList))")
+                            let combinedString = propertyList!.joined(separator: " , ")
+                            debugPrint(combinedString)
+                            
+                            isPresentingSheet = true
+                            sheetText = combinedString
+                            
                         }
-                        isPresentingSheet = true
-                        
                     }
+                    Divider().padding()
+                    Button("description 属性 \n选择后，点击查看") {
+                        if let selectedTable = selectedTable {
+                            let objectSchema = realm.schema.objectSchema.first(where: { $0.className == selectedTable })
+                            let propertyList = objectSchema?.description.map({ $0.description })
+                            
+                            let combinedString = propertyList!.joined(separator: "")
+                            debugPrint(combinedString)
+                            isPresentingSheet = true
+                            sheetText = combinedString
+                            
+                        }
+                    }
+                    Divider().padding()
+                    Button("table的数据 \n选择后，点击查看") {
+                        if let selectedTable = selectedTable {
+                            switch selectedTable {
+                            case "Item":
+                                sheetText = observedResultsToString(itemData)
+                            case "ItemGroup":
+                                sheetText = observedResultsToString(itemGroupData)
+                            default:
+                                sheetText = ""
+                            }
+                            isPresentingSheet = true
+                            
+                        }
+                    }
+                    List(viewModel.tables, id: \.self, selection: $selectedTable) { table in
+                        Text(table)
+                    }.frame(height: 200)
                 }
-                List(viewModel.tables, id: \.self, selection: $selectedTable) { table in
-                    Text(table)
-                }
-            }
-            
-            
-            Group{
-                Button("log") {
-                    //添加条件
-                    let people = realm.objects(Item.self).filter("isFavorite == true")
-                    debugPrint(people)
-                    
-                    debugPrint("viewModel.realm.configuration.inMemoryIdentifier")
-                    debugPrint(String(describing: viewModel.realm.configuration.inMemoryIdentifier))
-                    
-                    debugPrint("itemData")
-                    debugPrint(itemData)
-                    
-                    debugPrint("itemGroupData")
-                    debugPrint(itemGroupData)
-                }.padding()
                 
                 
-                Button("Delete All Tables") {
-                    showAllDeleteAlert.toggle()
-                }.padding()
-                Button("自我紹介的默认数据") {
-                    viewModel.defaultTables()
-                }.padding()
+                Group{
+                    Button("log") {
+                        //添加条件
+                        let people = realm.objects(Item.self).filter("isFavorite == true")
+                        debugPrint(people)
+                        
+                        debugPrint("viewModel.realm.configuration.inMemoryIdentifier")
+                        debugPrint(String(describing: viewModel.realm.configuration.inMemoryIdentifier))
+                        
+                        debugPrint("itemData")
+                        debugPrint(itemData)
+                        
+                        debugPrint("itemGroupData")
+                        debugPrint(itemGroupData)
+                    }.padding()
+                    
+                    
+                    Button("Delete All Tables") {
+                        showAllDeleteAlert.toggle()
+                    }.padding()
+                    Button("自我紹介的默认数据") {
+                        viewModel.defaultTables()
+                    }.padding()
+                }
+                
             }
-            
-        }
-        .alert(isPresented: $showAllDeleteAlert) {
-            Alert(title: Text("删除所有数据"),
-                  message: Text("确认删除所有数据吗?"),
-                  primaryButton: .destructive(Text("删除")) {
-                        viewModel.deleteAllTables()
-                  },
-                  secondaryButton: .cancel(Text("取消")))
-        }
-        .sheet(isPresented: $isPresentingSheet, content: {
-            NavigationView {
-                ViewRealmCtrlSheet(input_text: $sheetText)
-                    .navigationBarTitle(selectedTable!)
+            .alert(isPresented: $showAllDeleteAlert) {
+                Alert(title: Text("删除所有数据"),
+                      message: Text("确认删除所有数据吗?"),
+                      primaryButton: .destructive(Text("删除")) {
+                    viewModel.deleteAllTables()
+                },
+                      secondaryButton: .cancel(Text("取消")))
             }
-        })
+            .sheet(isPresented: $isPresentingSheet, content: {
+                NavigationView {
+                    ViewRealmCtrlSheet(input_text: $sheetText)
+                        .navigationBarTitle(selectedTable!)
+                }
+            })
+        }
     }
     
     func deleteTable(tableType: Object.Type) {
